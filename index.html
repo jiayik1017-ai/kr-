@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🇰🇷 韓國免稅代購帳本</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff5f7;
+  --surface:#ffffff;
+  --surface2:#ffeef2;
+  --surface3:#ffd6e0;
+  --border:rgba(220,130,150,0.2);
+  --border2:rgba(220,130,150,0.35);
+  --text:#3d2030;
+  --text2:#9b6b7a;
+  --text3:#c4a0ad;
+  --pink:#e05c7a;
+  --pink-light:#ffd6e0;
+  --pink-mid:#f5a0b5;
+  --rose:#f0829a;
+  --rose-dark:#c0415a;
+  --lilac:#e8d5f5;
+  --lilac-text:#7c4fa0;
+  --peach:#ffe8d6;
+  --peach-text:#b05a30;
+  --mint:#d5f0e8;
+  --mint-text:#2d7a5a;
+  --sky:#daeeff;
+  --sky-text:#2a6090;
+  --gold:#fff0c8;
+  --gold-text:#8a6000;
+  --radius:10px;
+  --radius-lg:16px;
+  --radius-xl:22px;
+}
+body{font-family:'Noto Sans TC',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
+.app{max-width:430px;margin:0 auto;padding-bottom:84px;min-height:100vh}
+
+/* ── header ── */
+.top-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px 10px;
+  background:linear-gradient(135deg,#ffe0ea 0%,#ffd6f0 50%,#e8d5f5 100%);
+  position:sticky;top:0;z-index:20;
+  border-bottom:1px solid rgba(220,130,150,0.15);
+}
+.app-title{font-size:17px;font-weight:600;color:var(--rose-dark);letter-spacing:0.3px}
+.rate-pill{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,0.7);
+  border:1px solid rgba(220,130,150,0.3);
+  border-radius:20px;padding:5px 10px;
+  font-size:12px;color:var(--text2);cursor:pointer;
+  backdrop-filter:blur(4px);
+  transition:background .15s;
+}
+.rate-pill:hover{background:rgba(255,255,255,0.9)}
+.rate-pill svg{width:13px;height:13px;transition:transform .2s}
+.rate-pill svg.open{transform:rotate(180deg)}
+
+/* ── nav buttons (top) ── */
+.nav-bar{
+  display:flex;gap:6px;padding:10px 16px 0;
+  background:var(--bg);
+  position:sticky;top:53px;z-index:19;
+}
+.nav-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  gap:3px;border:none;background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:var(--radius-lg);
+  padding:8px 4px 6px;cursor:pointer;
+  color:var(--text3);font-size:10px;
+  font-family:inherit;transition:all .18s;
+}
+.nav-btn svg{width:20px;height:20px;stroke-width:1.6}
+.nav-btn.active{
+  background:linear-gradient(145deg,#f8b4c8,#e87898);
+  color:#fff;border-color:transparent;
+  box-shadow:0 3px 10px rgba(232,120,152,0.35);
+}
+.nav-btn.active svg{stroke:#fff}
+.nav-label{font-size:10px;font-weight:500}
+
+/* ── rate panel ── */
+.rate-panel{
+  margin:8px 16px 0;
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:var(--radius-lg);
+  padding:14px;display:none;
+}
+.rate-panel.open{display:block}
+.rate-panel-head{font-size:12px;color:var(--text2);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.rate-panel-head span{font-size:11px;color:var(--pink);cursor:pointer;font-weight:500}
+.rate-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.rate-row:last-child{margin-bottom:0}
+.rate-flag{font-size:16px;min-width:22px}
+.rate-eq{font-size:12px;color:var(--text3)}
+.rate-input{flex:1;height:32px;font-size:13px;border:1px solid var(--border2);border-radius:var(--radius);padding:0 8px;background:var(--surface2);color:var(--text);outline:none;font-family:inherit}
+.rate-input:focus{border-color:var(--pink)}
+.rate-unit{font-size:12px;color:var(--text2);min-width:28px}
+
+/* ── pages ── */
+.page{display:none;padding:12px 16px 0}
+.page.active{display:block}
+
+/* ── search ── */
+.search-wrap{position:relative;margin-bottom:12px}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none}
+.search-icon svg{width:15px;height:15px}
+.search-input{
+  width:100%;height:38px;padding:0 34px;
+  font-size:13px;
+  border:1px solid var(--border2);
+  border-radius:20px;
+  background:var(--surface);
+  color:var(--text);outline:none;
+  font-family:inherit;
+  transition:border .15s;
+}
+.search-input::placeholder{color:var(--text3)}
+.search-input:focus{border-color:var(--pink-mid)}
+.search-clear{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  background:var(--pink-mid);border:none;color:#fff;
+  width:17px;height:17px;border-radius:50%;
+  font-size:10px;cursor:pointer;
+  display:none;align-items:center;justify-content:center;padding:0;
+}
+.search-clear.show{display:flex}
+.search-results{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.search-result-item{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
+.search-result-item:last-child{border-bottom:none}
+.search-result-item:hover{background:var(--surface2)}
+.search-result-info{flex:1;min-width:0}
+.search-result-name{font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-result-name em{color:var(--rose);font-style:normal;font-weight:600}
+.search-result-meta{font-size:11px;color:var(--text3);margin-top:2px}
+.search-result-amt{font-size:13px;font-weight:600;color:var(--text);text-align:right;white-space:nowrap}
+.search-result-sub{font-size:11px;color:var(--text3);text-align:right;margin-top:1px}
+.search-empty{text-align:center;padding:30px 0;color:var(--text3);font-size:13px}
+
+/* ── calendar ── */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-nav button{
+  background:none;border:none;cursor:pointer;
+  color:var(--text2);width:32px;height:32px;
+  border-radius:var(--radius);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .1s;
+}
+.cal-nav button:hover{background:var(--surface2)}
+.cal-nav button svg{width:18px;height:18px}
+.cal-title{font-size:15px;font-weight:600;color:var(--text)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-dow{text-align:center;font-size:10px;color:var(--pink-mid);padding:4px 0;font-weight:600}
+.cal-day{
+  aspect-ratio:1;border:none;background:transparent;
+  border-radius:var(--radius);cursor:pointer;
+  font-size:12px;color:var(--text);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;transition:background .1s;font-family:inherit;
+}
+.cal-day:hover:not(.empty){background:var(--surface2)}
+.cal-day.selected{background:linear-gradient(145deg,#f8b4c8,#e87898);color:#fff;font-weight:600}
+.cal-day.selected::after{background:#fff !important}
+.cal-day.has-data::after{content:'';width:4px;height:4px;border-radius:50%;background:var(--rose);display:block;flex-shrink:0}
+.cal-day.today .day-num{text-decoration:underline;text-underline-offset:2px}
+.cal-day.empty{pointer-events:none;opacity:0}
+
+/* ── day box ── */
+.day-box{margin-top:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px}
+.day-box-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.day-date{font-size:13px;color:var(--text2)}
+.day-sum{font-size:15px;font-weight:600;color:var(--rose-dark)}
+.rec-item{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 4px;border-bottom:1px solid var(--border);
+  cursor:pointer;border-radius:8px;margin:0 -4px;
+  transition:background .1s;
+}
+.rec-item:last-child{border-bottom:none}
+.rec-item:hover{background:var(--surface2)}
+.store-badge{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:500;white-space:nowrap;flex-shrink:0}
+.sc-0{background:var(--mint);color:var(--mint-text)}
+.sc-1{background:var(--sky);color:var(--sky-text)}
+.sc-2{background:var(--gold);color:var(--gold-text)}
+.sc-3{background:var(--lilac);color:var(--lilac-text)}
+.sc-4{background:var(--peach);color:var(--peach-text)}
+.sc-5{background:var(--surface3);color:var(--text2)}
+.rec-name{flex:1;font-size:13px;color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rec-right{text-align:right;flex-shrink:0}
+.rec-amt{font-size:13px;font-weight:600;color:var(--rose-dark)}
+.rec-sub{font-size:11px;color:var(--text3);margin-top:1px}
+.empty-day{text-align:center;padding:24px 0;color:var(--text3);font-size:13px}
+
+/* ── add form ── */
+.add-form{display:flex;flex-direction:column;gap:12px;padding-top:12px}
+.field-label{font-size:12px;color:var(--text2);margin-bottom:4px;font-weight:500}
+.seg{display:flex;gap:0;background:var(--surface2);border-radius:var(--radius);padding:3px;flex-wrap:wrap}
+.seg-btn{
+  flex:1;min-width:56px;height:28px;font-size:12px;
+  border:none;background:transparent;cursor:pointer;
+  border-radius:8px;color:var(--text2);
+  white-space:nowrap;font-family:inherit;transition:all .15s;
+}
+.seg-btn.active{
+  background:linear-gradient(145deg,#f8b4c8,#e87898);
+  color:#fff;font-weight:500;
+}
+.plist-input{
+  width:100%;height:40px;font-size:14px;
+  border:1px solid var(--border2);
+  border-radius:var(--radius);padding:0 12px;
+  background:var(--surface);color:var(--text);
+  outline:none;font-family:inherit;transition:border .15s;
+}
+.plist-input:focus{border-color:var(--pink-mid)}
+.currency-row{display:flex;gap:6px}
+.currency-row .plist-input{flex:1}
+.currency-sel{
+  height:40px;font-size:13px;
+  border:1px solid var(--border2);
+  border-radius:var(--radius);
+  padding:0 6px;background:var(--surface);
+  color:var(--text);width:88px;outline:none;font-family:inherit;
+}
+.btn-primary{
+  width:100%;height:44px;border:none;
+  border-radius:var(--radius-xl);
+  background:linear-gradient(135deg,#f5a0b5,#e05c7a);
+  color:#fff;font-size:15px;font-weight:600;
+  cursor:pointer;font-family:inherit;
+  transition:opacity .15s;
+  box-shadow:0 4px 14px rgba(224,92,122,0.35);
+}
+.btn-primary:active{opacity:.8}
+.btn-primary.success{background:linear-gradient(135deg,#80d4b4,#2d9a6a)}
+
+/* ── stats ── */
+.stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:14px;
+}
+.stat-lbl{font-size:11px;color:var(--text2);margin-bottom:5px;font-weight:500}
+.stat-val{font-size:20px;font-weight:600;color:var(--rose-dark)}
+.stat-sub{font-size:11px;color:var(--text3);margin-top:3px}
+.bar-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px;margin-bottom:12px}
+.section-title{font-size:12px;color:var(--text2);margin-bottom:12px;font-weight:600}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.bar-row:last-child{margin-bottom:0}
+.bar-store{font-size:12px;color:var(--text2);min-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-track{flex:1;height:8px;background:var(--surface2);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px}
+.bar-amt{font-size:12px;color:var(--text);font-weight:500;min-width:64px;text-align:right}
+.month-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px}
+.month-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px}
+.month-row:last-child{border-bottom:none}
+.month-name{color:var(--text2)}
+.month-twd{font-weight:600;color:var(--rose-dark)}
+.month-cnt{font-size:11px;color:var(--text3)}
+
+/* ── inventory ── */
+.inv-toolbar{display:flex;gap:8px;margin-bottom:12px;align-items:center}
+.inv-toolbar .search-wrap{flex:1;margin-bottom:0}
+.btn-add-inv{
+  height:38px;padding:0 14px;
+  border:none;border-radius:var(--radius-xl);
+  background:linear-gradient(135deg,#f5a0b5,#e05c7a);
+  color:#fff;font-size:13px;font-weight:500;
+  cursor:pointer;white-space:nowrap;font-family:inherit;
+  box-shadow:0 2px 8px rgba(224,92,122,0.3);
+}
+.inv-list{display:flex;flex-direction:column;gap:8px}
+.inv-item{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:12px;
+  display:flex;align-items:center;gap:10px;
+  cursor:pointer;transition:background .1s;
+}
+.inv-item:hover{background:var(--surface2)}
+.inv-thumb{
+  width:44px;height:44px;border-radius:10px;
+  background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.inv-info{flex:1;min-width:0}
+.inv-name{font-size:14px;font-weight:500;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.inv-meta{font-size:12px;color:var(--text2);margin-top:2px}
+.inv-right{text-align:right;flex-shrink:0}
+.inv-qty{
+  font-size:16px;font-weight:600;color:var(--rose-dark);
+  display:flex;align-items:center;gap:6px;justify-content:flex-end;
+}
+.qty-btn{
+  width:26px;height:26px;border:1px solid var(--border2);
+  border-radius:50%;background:var(--surface);
+  color:var(--text2);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  line-height:1;transition:background .1s;
+}
+.qty-btn:hover{background:var(--surface2)}
+.inv-status{font-size:11px;color:var(--text3);margin-top:3px}
+.inv-status.low{color:#c0415a;font-weight:500}
+.inv-empty{text-align:center;padding:40px 0;color:var(--text3);font-size:13px}
+
+/* ── modal ── */
+.modal-mask{
+  position:fixed;inset:0;background:rgba(61,32,48,0.4);
+  display:none;align-items:flex-end;justify-content:center;
+  z-index:100;
+}
+.modal-mask.open{display:flex}
+.modal-box{
+  background:var(--surface);border-radius:24px 24px 0 0;
+  padding:20px 20px 36px;width:100%;max-width:430px;
+  max-height:90vh;overflow-y:auto;
+}
+.modal-handle{width:36px;height:4px;background:var(--surface3);border-radius:2px;margin:0 auto 16px}
+.modal-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:16px}
+.modal-field{margin-bottom:12px}
+.modal-label{font-size:12px;color:var(--text2);margin-bottom:4px;font-weight:500}
+.modal-btns{display:flex;gap:8px;margin-top:18px}
+.btn-cancel{flex:1;height:42px;border:1px solid var(--border2);border-radius:var(--radius-xl);background:transparent;color:var(--text2);font-size:14px;cursor:pointer;font-family:inherit}
+.btn-save{flex:1;height:42px;border:none;border-radius:var(--radius-xl);background:linear-gradient(135deg,#f5a0b5,#e05c7a);color:#fff;font-size:14px;cursor:pointer;font-weight:600;font-family:inherit;box-shadow:0 3px 10px rgba(224,92,122,0.3)}
+.btn-delete{height:42px;border:none;border-radius:var(--radius-xl);background:var(--peach);color:var(--peach-text);font-size:13px;cursor:pointer;padding:0 16px;font-family:inherit}
+
+/* ── toast ── */
+.toast{
+  position:fixed;bottom:96px;left:50%;
+  transform:translateX(-50%) translateY(8px);
+  background:var(--rose-dark);color:#fff;
+  padding:9px 20px;border-radius:20px;
+  font-size:13px;opacity:0;pointer-events:none;
+  transition:all .25s;white-space:nowrap;z-index:200;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── section card ── */
+.section-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- header -->
+<div class="top-bar">
+  <span class="app-title">🇰🇷 免稅帳本</span>
+  <div class="rate-pill" onclick="toggleRate()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.5 8h5a2 2 0 0 1 0 4H9.5v4h5"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="18"/></svg>
+    <span id="rate-label">₩44 · $32</span>
+    <svg id="rate-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</div>
+
+<!-- rate panel -->
+<div class="rate-panel" id="rate-panel">
+  <div class="rate-panel-head">匯率設定<span onclick="fetchLiveRates()">⟳ 即時抓取</span></div>
+  <div class="rate-row">
+    <span class="rate-flag">🇰🇷</span>
+    <span class="rate-eq">₩1000 =</span>
+    <input class="rate-input" type="number" id="rate-krw" value="44" min="1" max="999" oninput="onRateChange()">
+    <span class="rate-unit">TWD</span>
+  </div>
+  <div class="rate-row">
+    <span class="rate-flag">🇺🇸</span>
+    <span class="rate-eq">$1 =</span>
+    <input class="rate-input" type="number" id="rate-usd" value="32" min="1" max="999" oninput="onRateChange()">
+    <span class="rate-unit">TWD</span>
+  </div>
+</div>
+
+<!-- top nav -->
+<div class="nav-bar">
+  <button class="nav-btn active" id="nb-cal" onclick="switchPage('cal',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <span class="nav-label">日曆</span>
+  </button>
+  <button class="nav-btn" id="nb-add" onclick="switchPage('add',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+    <span class="nav-label">新增</span>
+  </button>
+  <button class="nav-btn" id="nb-inv" onclick="switchPage('inv',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+    <span class="nav-label">庫存</span>
+  </button>
+  <button class="nav-btn" id="nb-stats" onclick="switchPage('stats',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    <span class="nav-label">統計</span>
+  </button>
+</div>
+
+<!-- ── page: 日曆 ── -->
+<div class="page active" id="page-cal">
+  <div class="search-wrap" style="margin-top:12px">
+    <span class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+    <input class="search-input" id="search-input" type="text" placeholder="搜尋品名、店家..." oninput="onSearch()" autocomplete="off">
+    <button class="search-clear" id="search-clear" onclick="clearSearch()">✕</button>
+  </div>
+  <div id="search-layer" style="display:none">
+    <div class="search-results" id="search-results"></div>
+  </div>
+  <div id="cal-layer">
+    <div class="cal-nav">
+      <button onclick="moveMonth(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="cal-title" id="cal-title"></span>
+      <button onclick="moveMonth(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+    <div class="day-box" id="day-box">
+      <div class="day-box-head">
+        <span class="day-date" id="day-date"></span>
+        <span class="day-sum" id="day-sum"></span>
+      </div>
+      <div id="day-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── page: 新增 ── -->
+<div class="page" id="page-add">
+  <div class="add-form">
+    <div>
+      <div class="field-label">店家</div>
+      <div class="seg" id="store-seg"></div>
+    </div>
+    <div>
+      <div class="field-label">品名</div>
+      <input class="plist-input" type="text" id="f-item" placeholder="例：LANEIGE 水凝霜">
+    </div>
+    <div>
+      <div class="field-label">金額（直接輸入，不自動換算）</div>
+      <div class="currency-row">
+        <input class="plist-input" type="number" id="f-amount" placeholder="0" inputmode="decimal">
+        <select class="currency-sel" id="f-currency">
+          <option value="krw">KRW ₩</option>
+          <option value="usd">USD $</option>
+          <option value="twd">TWD $</option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <div class="field-label">日期</div>
+      <input class="plist-input" type="date" id="f-date">
+    </div>
+    <button class="btn-primary" id="add-btn" onclick="addRecord()">✦ 新增紀錄</button>
+  </div>
+</div>
+
+<!-- ── page: 庫存 ── -->
+<div class="page" id="page-inv">
+  <div style="padding-top:12px">
+    <div class="inv-toolbar">
+      <div class="search-wrap" style="flex:1;margin-bottom:0">
+        <span class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        <input class="search-input" id="inv-search" type="text" placeholder="搜尋商品..." oninput="renderInv()" autocomplete="off">
+      </div>
+      <button class="btn-add-inv" onclick="openInvModal(null)">＋ 新增</button>
+    </div>
+    <div class="inv-list" id="inv-list"></div>
+  </div>
+</div>
+
+<!-- ── page: 統計 ── -->
+<div class="page" id="page-stats">
+  <div style="padding-top:12px">
+    <div class="stat-cards" id="stat-cards"></div>
+    <div class="bar-section">
+      <div class="section-title">各店家消費</div>
+      <div id="store-bars"></div>
+    </div>
+    <div class="month-list section-card" id="month-list" style="display:none">
+      <div class="section-title" style="padding:12px 14px 0">歷月紀錄</div>
+      <div id="month-rows"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<!-- edit record modal -->
+<div class="modal-mask" id="edit-modal" onclick="closeEdit()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div class="modal-title">✏️ 編輯紀錄</div>
+    <div class="modal-field"><div class="modal-label">日期</div><input class="plist-input" type="date" id="e-date"></div>
+    <div class="modal-field"><div class="modal-label">店家</div><select class="plist-input" id="e-store"></select></div>
+    <div class="modal-field"><div class="modal-label">品名</div><input class="plist-input" type="text" id="e-item"></div>
+    <div class="modal-field">
+      <div class="modal-label">金額</div>
+      <div class="currency-row">
+        <input class="plist-input" type="number" id="e-amount">
+        <select class="currency-sel" id="e-currency">
+          <option value="krw">KRW ₩</option>
+          <option value="usd">USD $</option>
+          <option value="twd">TWD $</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-delete" onclick="deleteRecord()">刪除</button>
+      <button class="btn-cancel" onclick="closeEdit()">取消</button>
+      <button class="btn-save" onclick="saveEdit()">儲存</button>
+    </div>
+  </div>
+</div>
+
+<!-- inventory modal -->
+<div class="modal-mask" id="inv-modal" onclick="closeInvModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="inv-modal-title">📦 新增庫存</div>
+    <div class="modal-field"><div class="modal-label">品名</div><input class="plist-input" type="text" id="iv-name" placeholder="例：LANEIGE 水凝霜 50ml"></div>
+    <div class="modal-field"><div class="modal-label">表情符號（選填）</div><input class="plist-input" type="text" id="iv-emoji" placeholder="例：🧴 💄 🧪" maxlength="4"></div>
+    <div class="modal-field"><div class="modal-label">數量</div><input class="plist-input" type="number" id="iv-qty" value="1" min="0"></div>
+    <div class="modal-field"><div class="modal-label">低庫存警示門檻</div><input class="plist-input" type="number" id="iv-low" value="1" min="0"></div>
+    <div class="modal-field"><div class="modal-label">備註（選填）</div><input class="plist-input" type="text" id="iv-note" placeholder="例：自用 / 代購 × 2"></div>
+    <div class="modal-btns">
+      <button class="btn-delete" id="iv-delete-btn" onclick="deleteInv()" style="display:none">刪除</button>
+      <button class="btn-cancel" onclick="closeInvModal()">取消</button>
+      <button class="btn-save" onclick="saveInv()">儲存</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════
+// constants
+// ═══════════════════════════════════
+const DEFAULT_STORES = ['樂天免稅','新世界免稅','新羅免稅','現代免稅','愛保羅','其他支出'];
+const STORE_COLORS   = ['sc-0','sc-1','sc-2','sc-3','sc-4','sc-5'];
+const BAR_COLORS     = ['#5DCAA5','#5bb8e8','#EFBF50','#b08ae0','#F0997B','#d4a0b0'];
+const MONTHS_ZH = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+
+// ═══════════════════════════════════
+// safe storage — never overwrites,
+// always merges on first load
+// ═══════════════════════════════════
+const KEYS = { stores:'df_stores', records:'df_records', rates:'df_rates', inv:'df_inventory' };
+
+function safeGet(key, fallback) {
+  try {
+    const v = localStorage.getItem(key);
+    if (v === null) return fallback;        // key missing → use default
+    return JSON.parse(v);
+  } catch(e) { return fallback; }
+}
+function safeSet(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); }
+  catch(e) { showToast('儲存空間不足，請清理瀏覽器資料'); }
+}
+
+// ── load — existing data always wins ──
+let stores    = safeGet(KEYS.stores,  DEFAULT_STORES);
+let records   = safeGet(KEYS.records, []);
+let rates     = safeGet(KEYS.rates,   {krw:44,usd:32});
+let inventory = safeGet(KEYS.inv,     []);
+
+// persist stores if first run
+if (!localStorage.getItem(KEYS.stores)) safeSet(KEYS.stores, stores);
+
+// ═══════════════════════════════════
+// utils
+// ═══════════════════════════════════
+function uid()      { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+function todayStr() { return new Date().toISOString().slice(0,10); }
+function esc(s)     { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function fmtAmt(amount, currency) {
+  if (!amount) return '—';
+  if (currency === 'krw') return '₩' + Math.round(amount).toLocaleString();
+  if (currency === 'usd') return '$' + parseFloat(amount).toFixed(2);
+  return 'NT$' + Math.round(amount).toLocaleString();
+}
+function storeColor(name) {
+  const i = stores.indexOf(name);
+  return STORE_COLORS[i >= 0 ? i % STORE_COLORS.length : STORE_COLORS.length-1];
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ═══════════════════════════════════
+// rates
+// ═══════════════════════════════════
+function toggleRate() {
+  const p = document.getElementById('rate-panel');
+  const a = document.getElementById('rate-arrow');
+  const open = p.classList.toggle('open');
+  a.classList.toggle('open', open);
+}
+function onRateChange() {
+  rates.krw = parseFloat(document.getElementById('rate-krw').value) || 44;
+  rates.usd = parseFloat(document.getElementById('rate-usd').value) || 32;
+  safeSet(KEYS.rates, rates);
+  document.getElementById('rate-label').textContent = '₩' + rates.krw + ' · $' + rates.usd;
+}
+async function fetchLiveRates() {
+  showToast('抓取匯率中…');
+  try {
+    const res = await fetch('https://api.frankfurter.app/latest?from=TWD&to=KRW,USD');
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    const krw = Math.round(1000 / data.rates.KRW * 10) / 10;
+    const usd = Math.round(1 / data.rates.USD * 10) / 10;
+    document.getElementById('rate-krw').value = krw;
+    document.getElementById('rate-usd').value = usd;
+    onRateChange();
+    showToast('匯率已更新 ✓');
+  } catch { showToast('無法取得即時匯率，請手動輸入'); }
+}
+
+// ═══════════════════════════════════
+// page switch
+// ═══════════════════════════════════
+function switchPage(name, btn) {
+  ['cal','add','inv','stats'].forEach(n => {
+    document.getElementById('page-'+n)?.classList.toggle('active', n===name);
+    document.getElementById('nb-'+n)?.classList.toggle('active', n===name);
+  });
+  if (name==='stats') renderStats();
+  if (name==='inv')   renderInv();
+}
+
+// ═══════════════════════════════════
+// calendar
+// ═══════════════════════════════════
+let calY = new Date().getFullYear();
+let calM = new Date().getMonth();
+let selDate = todayStr();
+
+function moveMonth(d) {
+  calM += d;
+  if (calM < 0)  { calM=11; calY--; }
+  if (calM > 11) { calM=0;  calY++; }
+  renderCal();
+}
+function renderCal() {
+  document.getElementById('cal-title').textContent = calY + ' · ' + MONTHS_ZH[calM];
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = ['日','一','二','三','四','五','六'].map(d=>`<div class="cal-dow">${d}</div>`).join('');
+  const firstDay = new Date(calY, calM, 1).getDay();
+  const daysIn   = new Date(calY, calM+1, 0).getDate();
+  const today    = todayStr();
+  const dateSet  = new Set(records.map(r=>r.date));
+  for (let i=0; i<firstDay; i++) { const e=document.createElement('div'); e.className='cal-day empty'; grid.appendChild(e); }
+  for (let d=1; d<=daysIn; d++) {
+    const ds = calY+'-'+String(calM+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    const btn = document.createElement('button');
+    btn.className = 'cal-day'+(ds===selDate?' selected':'')+(dateSet.has(ds)?' has-data':'')+(ds===today?' today':'');
+    btn.innerHTML = `<span class="day-num">${d}</span>`;
+    btn.onclick = () => { selDate=ds; renderCal(); };
+    grid.appendChild(btn);
+  }
+  renderDayBox();
+}
+function renderDayBox() {
+  const dayRecs = records.filter(r=>r.date===selDate);
+  document.getElementById('day-date').textContent = selDate;
+  const list = document.getElementById('day-list');
+  if (!dayRecs.length) {
+    list.innerHTML = '<div class="empty-day">這天還沒有紀錄 ✦</div>';
+    document.getElementById('day-sum').textContent = '';
+    return;
+  }
+  // show count & currencies summary
+  const summary = {};
+  dayRecs.forEach(r => { summary[r.currency||'twd'] = (summary[r.currency||'twd']||0) + (r.origAmount||0); });
+  const sumStr = Object.entries(summary).map(([cur,amt])=>fmtAmt(amt,cur)).join(' + ');
+  document.getElementById('day-sum').textContent = sumStr;
+  list.innerHTML = dayRecs.map(r=>`
+    <div class="rec-item" onclick="openEdit('${r.id}')">
+      <span class="store-badge ${storeColor(r.store)}">${esc(r.store)}</span>
+      <span class="rec-name">${esc(r.item)}</span>
+      <div class="rec-right">
+        <div class="rec-amt">${fmtAmt(r.origAmount, r.currency||'twd')}</div>
+      </div>
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════
+// search
+// ═══════════════════════════════════
+function onSearch() {
+  const q = document.getElementById('search-input').value.trim();
+  document.getElementById('search-clear').classList.toggle('show', q.length>0);
+  document.getElementById('search-layer').style.display = q ? '' : 'none';
+  document.getElementById('cal-layer').style.display    = q ? 'none' : '';
+  if (q) renderSearch(q);
+}
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-clear').classList.remove('show');
+  document.getElementById('search-layer').style.display = 'none';
+  document.getElementById('cal-layer').style.display    = '';
+}
+function highlight(text, q) {
+  const re = new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+  return esc(text).replace(re,'<em>$1</em>');
+}
+function renderSearch(q) {
+  const lower = q.toLowerCase();
+  const hits = records.filter(r=>r.item.toLowerCase().includes(lower)||r.store.toLowerCase().includes(lower))
+                      .sort((a,b)=>b.date.localeCompare(a.date));
+  const container = document.getElementById('search-results');
+  if (!hits.length) { container.innerHTML=`<div class="search-empty">找不到「${esc(q)}」的紀錄 🌸</div>`; return; }
+  container.innerHTML = hits.map(r=>`
+    <div class="search-result-item" onclick="openEdit('${r.id}')">
+      <span class="store-badge ${storeColor(r.store)}">${esc(r.store)}</span>
+      <div class="search-result-info">
+        <div class="search-result-name">${highlight(r.item,q)}</div>
+        <div class="search-result-meta">${r.date}</div>
+      </div>
+      <div class="search-result-amt">${fmtAmt(r.origAmount,r.currency||'twd')}</div>
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════
+// add record
+// ═══════════════════════════════════
+let selectedStore = stores[0];
+function buildStoreSeg() {
+  const seg = document.getElementById('store-seg');
+  seg.innerHTML = stores.map((s,i)=>
+    `<button class="seg-btn${i===0?' active':''}" onclick="selStore(this,'${esc(s)}')">${esc(s.replace('免稅',''))}</button>`
+  ).join('');
+  selectedStore = stores[0];
+}
+function selStore(btn, name) {
+  selectedStore = name;
+  document.querySelectorAll('#store-seg .seg-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function addRecord() {
+  const item   = document.getElementById('f-item').value.trim();
+  const amt    = parseFloat(document.getElementById('f-amount').value);
+  const cur    = document.getElementById('f-currency').value;
+  const date   = document.getElementById('f-date').value;
+  if (!item)          { showToast('請輸入品名'); return; }
+  if (!amt||isNaN(amt)){ showToast('請輸入金額'); return; }
+  if (!date)          { showToast('請選擇日期'); return; }
+  const rec = { id:uid(), date, store:selectedStore, item, currency:cur, origAmount:amt };
+  records.push(rec);
+  safeSet(KEYS.records, records);
+  document.getElementById('f-item').value   = '';
+  document.getElementById('f-amount').value = '';
+  const btn = document.getElementById('add-btn');
+  btn.textContent = '✓ 已新增！';
+  btn.classList.add('success');
+  showToast('紀錄已新增 🌸');
+  setTimeout(()=>{ btn.textContent='✦ 新增紀錄'; btn.classList.remove('success'); }, 1600);
+}
+
+// ═══════════════════════════════════
+// edit / delete record
+// ═══════════════════════════════════
+let editingId = null;
+function openEdit(id) {
+  const r = records.find(x=>x.id===id);
+  if (!r) return;
+  editingId = id;
+  document.getElementById('e-date').value   = r.date;
+  document.getElementById('e-item').value   = r.item;
+  document.getElementById('e-amount').value = r.origAmount || '';
+  document.getElementById('e-currency').value = r.currency || 'twd';
+  const sel = document.getElementById('e-store');
+  sel.innerHTML = stores.map(s=>`<option${s===r.store?' selected':''}>${esc(s)}</option>`).join('');
+  document.getElementById('edit-modal').classList.add('open');
+}
+function closeEdit() { document.getElementById('edit-modal').classList.remove('open'); editingId=null; }
+function saveEdit() {
+  if (!editingId) return;
+  const r = records.find(x=>x.id===editingId);
+  if (!r) return;
+  r.date       = document.getElementById('e-date').value;
+  r.store      = document.getElementById('e-store').value;
+  r.item       = document.getElementById('e-item').value.trim();
+  r.origAmount = parseFloat(document.getElementById('e-amount').value) || 0;
+  r.currency   = document.getElementById('e-currency').value;
+  safeSet(KEYS.records, records);
+  closeEdit(); renderCal();
+  const q = document.getElementById('search-input').value.trim();
+  if (q) renderSearch(q);
+  showToast('更新成功 ✓');
+}
+function deleteRecord() {
+  if (!editingId) return;
+  if (!confirm('確定刪除這筆紀錄？')) return;
+  records = records.filter(x=>x.id!==editingId);
+  safeSet(KEYS.records, records);
+  closeEdit(); renderCal();
+  const q = document.getElementById('search-input').value.trim();
+  if (q) renderSearch(q);
+  showToast('已刪除');
+}
+
+// ═══════════════════════════════════
+// inventory
+// ═══════════════════════════════════
+let editingInvId = null;
+const EMOJIS = ['🧴','💄','🧪','💊','🧼','🌸','✨','🎁','🛍','👜','🧦','🎀'];
+function renderInv() {
+  const q = (document.getElementById('inv-search')?.value||'').toLowerCase();
+  const filtered = inventory.filter(iv=>!q||iv.name.toLowerCase().includes(q));
+  const list = document.getElementById('inv-list');
+  if (!filtered.length) {
+    list.innerHTML = `<div class="inv-empty">${q?'找不到符合的商品 🌸':'還沒有庫存，點右上角新增 ✦'}</div>`;
+    return;
+  }
+  list.innerHTML = filtered.map(iv=>{
+    const low = iv.qty <= iv.low;
+    const emoji = iv.emoji || EMOJIS[Math.abs(iv.name.charCodeAt(0))%EMOJIS.length];
+    return `<div class="inv-item" onclick="openInvModal('${iv.id}')">
+      <div class="inv-thumb">${emoji}</div>
+      <div class="inv-info">
+        <div class="inv-name">${esc(iv.name)}</div>
+        <div class="inv-meta">${iv.note?esc(iv.note):'&nbsp;'}</div>
+      </div>
+      <div class="inv-right">
+        <div class="inv-qty">
+          <button class="qty-btn" onclick="event.stopPropagation();changeQty('${iv.id}',-1)">−</button>
+          <span>${iv.qty}</span>
+          <button class="qty-btn" onclick="event.stopPropagation();changeQty('${iv.id}',1)">＋</button>
+        </div>
+        <div class="inv-status${low?' low':''}">${low?'⚠ 庫存不足':' '}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function changeQty(id, delta) {
+  const iv = inventory.find(x=>x.id===id);
+  if (!iv) return;
+  iv.qty = Math.max(0, iv.qty + delta);
+  safeSet(KEYS.inv, inventory);
+  renderInv();
+}
+function openInvModal(id) {
+  editingInvId = id;
+  const iv = id ? inventory.find(x=>x.id===id) : null;
+  document.getElementById('inv-modal-title').textContent = iv ? '✏️ 編輯庫存' : '📦 新增庫存';
+  document.getElementById('iv-name').value  = iv ? iv.name  : '';
+  document.getElementById('iv-emoji').value = iv ? (iv.emoji||'') : '';
+  document.getElementById('iv-qty').value   = iv ? iv.qty   : 1;
+  document.getElementById('iv-low').value   = iv ? iv.low   : 1;
+  document.getElementById('iv-note').value  = iv ? (iv.note||'') : '';
+  document.getElementById('iv-delete-btn').style.display = iv ? '' : 'none';
+  document.getElementById('inv-modal').classList.add('open');
+}
+function closeInvModal() { document.getElementById('inv-modal').classList.remove('open'); editingInvId=null; }
+function saveInv() {
+  const name = document.getElementById('iv-name').value.trim();
+  if (!name) { showToast('請輸入品名'); return; }
+  const qty  = parseInt(document.getElementById('iv-qty').value)||0;
+  const low  = parseInt(document.getElementById('iv-low').value)||1;
+  const note = document.getElementById('iv-note').value.trim();
+  const emoji= document.getElementById('iv-emoji').value.trim();
+  if (editingInvId) {
+    const iv = inventory.find(x=>x.id===editingInvId);
+    if (iv) { iv.name=name; iv.qty=qty; iv.low=low; iv.note=note; iv.emoji=emoji||iv.emoji; }
+  } else {
+    inventory.push({ id:uid(), name, qty, low, note, emoji });
+  }
+  safeSet(KEYS.inv, inventory);
+  closeInvModal(); renderInv();
+  showToast('庫存已儲存 ✓');
+}
+function deleteInv() {
+  if (!editingInvId) return;
+  if (!confirm('確定刪除這項庫存？')) return;
+  inventory = inventory.filter(x=>x.id!==editingInvId);
+  safeSet(KEYS.inv, inventory);
+  closeInvModal(); renderInv();
+  showToast('已刪除');
+}
+
+// ═══════════════════════════════════
+// stats
+// ═══════════════════════════════════
+function renderStats() {
+  const now   = new Date();
+  const mStr  = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
+  const mRecs = records.filter(r=>r.date.startsWith(mStr));
+  // group by currency for summary
+  const curTots = {};
+  mRecs.forEach(r=>{ const c=r.currency||'twd'; curTots[c]=(curTots[c]||0)+(r.origAmount||0); });
+  const totStr = Object.entries(curTots).map(([c,a])=>fmtAmt(a,c)).join(' ＋ ') || '—';
+  document.getElementById('stat-cards').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-lbl">本月消費合計</div>
+      <div class="stat-val" style="font-size:15px;margin-top:4px">${totStr}</div>
+      <div class="stat-sub">${mRecs.length} 筆紀錄</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-lbl">全部紀錄</div>
+      <div class="stat-val">${records.length}</div>
+      <div class="stat-sub">庫存 ${inventory.length} 項</div>
+    </div>`;
+  // by store (count-based since no unified currency)
+  const byStore = {};
+  records.forEach(r=>{ byStore[r.store]=(byStore[r.store]||0)+1; });
+  const sorted = Object.entries(byStore).sort((a,b)=>b[1]-a[1]);
+  const max = sorted[0]?sorted[0][1]:1;
+  document.getElementById('store-bars').innerHTML = sorted.map(([name,cnt])=>{
+    const ci = stores.indexOf(name);
+    const color = BAR_COLORS[ci>=0?ci%BAR_COLORS.length:BAR_COLORS.length-1];
+    return `<div class="bar-row">
+      <span class="bar-store">${esc(name)}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(cnt/max*100)}%;background:${color}"></div></div>
+      <span class="bar-amt">${cnt} 筆</span>
+    </div>`;
+  }).join('') || '<div style="text-align:center;color:var(--text3);padding:20px;font-size:13px">尚無資料</div>';
+  // monthly
+  const byMonth = {};
+  records.forEach(r=>{ const m=r.date.slice(0,7); if(!byMonth[m])byMonth[m]={cnt:0,summary:{}}; byMonth[m].cnt++; const c=r.currency||'twd'; byMonth[m].summary[c]=(byMonth[m].summary[c]||0)+(r.origAmount||0); });
+  const months = Object.entries(byMonth).sort((a,b)=>b[0].localeCompare(a[0]));
+  const ml = document.getElementById('month-list');
+  if (months.length>1) {
+    ml.style.display='';
+    document.getElementById('month-rows').innerHTML = months.map(([m,v])=>{
+      const [y,mo]=m.split('-');
+      const s=Object.entries(v.summary).map(([c,a])=>fmtAmt(a,c)).join('+');
+      return `<div class="month-row">
+        <span class="month-name">${y} · ${MONTHS_ZH[parseInt(mo)-1]}</span>
+        <span class="month-cnt">${v.cnt} 筆</span>
+        <span class="month-twd">${s}</span>
+      </div>`;
+    }).join('');
+  } else { ml.style.display='none'; }
+}
+
+// ═══════════════════════════════════
+// init
+// ═══════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('f-date').value = todayStr();
+  document.getElementById('rate-krw').value = rates.krw;
+  document.getElementById('rate-usd').value = rates.usd;
+  document.getElementById('rate-label').textContent = '₩'+rates.krw+' · $'+rates.usd;
+  buildStoreSeg();
+  renderCal();
+});
+</script>
+</body>
+</html>
