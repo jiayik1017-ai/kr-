@@ -342,6 +342,9 @@ body{font-family:'Noto Sans TC',-apple-system,BlinkMacSystemFont,sans-serif;back
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+.stats-clickable{cursor:pointer;border-radius:var(--radius);transition:background .12s}
+.stats-clickable:hover{background:var(--surface2)}
+.month-row.stats-clickable:hover{background:var(--surface2)}
 /* ── section card ── */
 .section-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:12px}
 </style>
@@ -483,6 +486,15 @@ body{font-family:'Noto Sans TC',-apple-system,BlinkMacSystemFont,sans-serif;back
 </div>
 
 </div><!-- /app -->
+
+<!-- stats detail modal -->
+<div class="modal-mask" id="stats-modal" onclick="closeStatsModal()">
+  <div class="modal-box" onclick="event.stopPropagation()" style="max-height:82vh;overflow-y:auto">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="stats-modal-title">詳細紀錄</div>
+    <div id="stats-modal-body"></div>
+  </div>
+</div>
 
 <!-- edit record modal -->
 <div class="modal-mask" id="edit-modal" onclick="closeEdit()">
@@ -745,18 +757,36 @@ function addRecord() {
   const amt    = parseFloat(document.getElementById('f-amount').value);
   const cur    = document.getElementById('f-currency').value;
   const date   = document.getElementById('f-date').value;
-  if (!item)          { showToast('請輸入品名'); return; }
+  if (!item)           { showToast('請輸入品名'); return; }
   if (!amt||isNaN(amt)){ showToast('請輸入金額'); return; }
-  if (!date)          { showToast('請選擇日期'); return; }
+  if (!date)           { showToast('請選擇日期'); return; }
+
+  // ── save record ──
   const rec = { id:uid(), date, store:selectedStore, item, currency:cur, origAmount:amt };
   records.push(rec);
   safeSet(KEYS.records, records);
+
+  // ── auto-sync inventory ──
+  // find existing by exact or fuzzy name match (lower-case trim)
+  const itemLow = item.toLowerCase();
+  const existing = inventory.find(iv => iv.name.toLowerCase() === itemLow);
+  if (existing) {
+    existing.qty += 1;
+    safeSet(KEYS.inv, inventory);
+    showToast(`紀錄已新增，庫存「${existing.name}」+1 🌸`);
+  } else {
+    const EMOJIS = ['🧴','💄','🧪','💊','🧼','🌸','✨','🎁','🛍','👜','🧦','🎀'];
+    const emoji  = EMOJIS[Math.abs(item.charCodeAt(0)) % EMOJIS.length];
+    inventory.push({ id:uid(), name:item, qty:1, low:1, note:'', emoji });
+    safeSet(KEYS.inv, inventory);
+    showToast(`紀錄已新增，已建立庫存「${item}」🌸`);
+  }
+
   document.getElementById('f-item').value   = '';
   document.getElementById('f-amount').value = '';
   const btn = document.getElementById('add-btn');
   btn.textContent = '✓ 已新增！';
   btn.classList.add('success');
-  showToast('紀錄已新增 🌸');
   setTimeout(()=>{ btn.textContent='✦ 新增紀錄'; btn.classList.remove('success'); }, 1600);
 }
 
@@ -889,7 +919,6 @@ function renderStats() {
   const now   = new Date();
   const mStr  = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
   const mRecs = records.filter(r=>r.date.startsWith(mStr));
-  // group by currency for summary
   const curTots = {};
   mRecs.forEach(r=>{ const c=r.currency||'twd'; curTots[c]=(curTots[c]||0)+(r.origAmount||0); });
   const totStr = Object.entries(curTots).map(([c,a])=>fmtAmt(a,c)).join(' ＋ ') || '—';
@@ -904,7 +933,8 @@ function renderStats() {
       <div class="stat-val">${records.length}</div>
       <div class="stat-sub">庫存 ${inventory.length} 項</div>
     </div>`;
-  // by store (count-based since no unified currency)
+
+  // by store — clickable
   const byStore = {};
   records.forEach(r=>{ byStore[r.store]=(byStore[r.store]||0)+1; });
   const sorted = Object.entries(byStore).sort((a,b)=>b[1]-a[1]);
@@ -912,30 +942,76 @@ function renderStats() {
   document.getElementById('store-bars').innerHTML = sorted.map(([name,cnt])=>{
     const ci = stores.indexOf(name);
     const color = BAR_COLORS[ci>=0?ci%BAR_COLORS.length:BAR_COLORS.length-1];
-    return `<div class="bar-row">
+    return `<div class="bar-row stats-clickable" onclick="openStatsDetail('store','${esc(name)}')" title="點擊查看明細">
       <span class="bar-store">${esc(name)}</span>
       <div class="bar-track"><div class="bar-fill" style="width:${Math.round(cnt/max*100)}%;background:${color}"></div></div>
-      <span class="bar-amt">${cnt} 筆</span>
+      <span class="bar-amt">${cnt} 筆 ›</span>
     </div>`;
   }).join('') || '<div style="text-align:center;color:var(--text3);padding:20px;font-size:13px">尚無資料</div>';
-  // monthly
+
+  // monthly — clickable
   const byMonth = {};
-  records.forEach(r=>{ const m=r.date.slice(0,7); if(!byMonth[m])byMonth[m]={cnt:0,summary:{}}; byMonth[m].cnt++; const c=r.currency||'twd'; byMonth[m].summary[c]=(byMonth[m].summary[c]||0)+(r.origAmount||0); });
+  records.forEach(r=>{
+    const m=r.date.slice(0,7);
+    if(!byMonth[m])byMonth[m]={cnt:0,summary:{}};
+    byMonth[m].cnt++;
+    const c=r.currency||'twd';
+    byMonth[m].summary[c]=(byMonth[m].summary[c]||0)+(r.origAmount||0);
+  });
   const months = Object.entries(byMonth).sort((a,b)=>b[0].localeCompare(a[0]));
   const ml = document.getElementById('month-list');
-  if (months.length>1) {
+  if (months.length) {
     ml.style.display='';
     document.getElementById('month-rows').innerHTML = months.map(([m,v])=>{
       const [y,mo]=m.split('-');
-      const s=Object.entries(v.summary).map(([c,a])=>fmtAmt(a,c)).join('+');
-      return `<div class="month-row">
+      const s=Object.entries(v.summary).map(([c,a])=>fmtAmt(a,c)).join(' ＋ ');
+      return `<div class="month-row stats-clickable" onclick="openStatsDetail('month','${m}')">
         <span class="month-name">${y} · ${MONTHS_ZH[parseInt(mo)-1]}</span>
         <span class="month-cnt">${v.cnt} 筆</span>
-        <span class="month-twd">${s}</span>
+        <span class="month-twd">${s} ›</span>
       </div>`;
     }).join('');
   } else { ml.style.display='none'; }
 }
+
+// ── stats detail modal ──
+function openStatsDetail(type, key) {
+  let title = '', recs = [];
+  if (type === 'store') {
+    title = `🏪 ${key}`;
+    recs  = records.filter(r=>r.store===key).sort((a,b)=>b.date.localeCompare(a.date));
+  } else {
+    const [y,mo] = key.split('-');
+    title = `📅 ${y} · ${MONTHS_ZH[parseInt(mo)-1]}`;
+    recs  = records.filter(r=>r.date.startsWith(key)).sort((a,b)=>b.date.localeCompare(a.date));
+  }
+  document.getElementById('stats-modal-title').textContent = title;
+
+  // currency totals
+  const tots = {};
+  recs.forEach(r=>{ const c=r.currency||'twd'; tots[c]=(tots[c]||0)+(r.origAmount||0); });
+  const totLine = Object.entries(tots).map(([c,a])=>fmtAmt(a,c)).join(' ＋ ') || '—';
+
+  const rows = recs.map(r=>`
+    <div class="rec-item" style="cursor:pointer" onclick="closeStatsModal();openEdit('${r.id}')">
+      <span class="store-badge ${storeColor(r.store)}">${esc(r.store)}</span>
+      <div style="flex:1;min-width:0">
+        <div class="rec-name">${esc(r.item)}</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px">${r.date}</div>
+      </div>
+      <div class="rec-right">
+        <div class="rec-amt">${fmtAmt(r.origAmount,r.currency||'twd')}</div>
+      </div>
+    </div>`).join('') || '<div class="empty-day">無紀錄</div>';
+
+  document.getElementById('stats-modal-body').innerHTML = `
+    <div style="background:var(--surface2);border-radius:var(--radius);padding:10px 12px;margin-bottom:12px;font-size:13px;color:var(--text2)">
+      共 <strong style="color:var(--rose-dark)">${recs.length}</strong> 筆 ・ 合計 <strong style="color:var(--rose-dark)">${totLine}</strong>
+    </div>
+    ${rows}`;
+  document.getElementById('stats-modal').classList.add('open');
+}
+function closeStatsModal() { document.getElementById('stats-modal').classList.remove('open'); }
 
 // ═══════════════════════════════════
 // init
