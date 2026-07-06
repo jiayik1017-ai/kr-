@@ -20,13 +20,13 @@
   --green:#d4f0e0;--green-text:#1a7a45;
   --r:10px;--rl:16px;--rxl:22px;
 }
-body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
+body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:17px}
 .app{max-width:430px;margin:0 auto;padding-bottom:20px;min-height:100vh}
 
 /* header */
 .top-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px;background:linear-gradient(135deg,#ffe0ea,#ffd6f0 50%,#e8d5f5);position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(220,130,150,0.15)}
-.app-title{font-size:17px;font-weight:600;color:var(--rose-dark)}
-.rate-pill{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.75);border:1px solid rgba(220,130,150,0.3);border-radius:20px;padding:5px 10px;font-size:12px;color:var(--text2);cursor:pointer;backdrop-filter:blur(4px)}
+.app-title{font-size:19px;font-weight:600;color:var(--rose-dark)}
+.rate-pill{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.75);border:1px solid rgba(220,130,150,0.3);border-radius:20px;padding:5px 10px;font-size:14px;color:var(--text2);cursor:pointer;backdrop-filter:blur(4px)}
 .rate-pill svg{width:13px;height:13px;transition:transform .2s}
 .rate-pill svg.open{transform:rotate(180deg)}
 
@@ -36,54 +36,67 @@ body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);co
 .nav-btn svg{width:19px;height:19px;stroke-width:1.6}
 .nav-btn.active{background:linear-gradient(145deg,#f8b4c8,#e87898);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(232,120,152,0.35)}
 .nav-btn.active svg{stroke:#fff}
-.nav-label{font-size:10px;font-weight:500}
+.nav-label{font-size:12px;font-weight:500}
 
 /* rate panel */
 .rate-panel{margin:8px 16px 0;background:var(--surface);border:1px solid var(--border2);border-radius:var(--rl);padding:14px;display:none}
 .rate-panel.open{display:block}
-.rate-ph{font-size:12px;color:var(--text2);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.rate-ph span{font-size:11px;color:var(--pink);cursor:pointer;font-weight:500}
+.rate-ph{font-size:14px;color:var(--text2);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.rate-ph span{font-size:13px;color:var(--pink);cursor:pointer;font-weight:500}
 .rate-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .rate-row:last-child{margin-bottom:0}
-.rate-flag{font-size:16px;min-width:22px}
-.rate-eq{font-size:12px;color:var(--text3)}
-.rate-input{flex:1;height:32px;font-size:13px;border:1px solid var(--border2);border-radius:var(--r);padding:0 8px;background:var(--surface2);color:var(--text);outline:none;font-family:inherit}
+.rate-flag{font-size:18px;min-width:22px}
+.rate-eq{font-size:14px;color:var(--text3)}
+.rate-input{flex:1;height:32px;font-size:15px;border:1px solid var(--border2);border-radius:var(--r);padding:0 8px;background:var(--surface2);color:var(--text);outline:none;font-family:inherit}
 .rate-input:focus{border-color:var(--pink)}
-.rate-unit{font-size:12px;color:var(--text2);min-width:28px}
+.rate-unit{font-size:14px;color:var(--text2);min-width:28px}
 
 /* pages */
 .page{display:none;padding:12px 16px 0}
 .page.active{display:block}
 
+/* item rows (multi-item add form) */
+.item-rows-head{display:flex;gap:6px;padding:0 2px;margin-bottom:6px}
+.item-rows-head .irh-name{flex:2;font-size:14px;color:var(--text3)}
+.item-rows-head .irh-qty{flex:0 0 58px;font-size:14px;color:var(--text3);text-align:center}
+.item-rows-head .irh-amt{flex:1.3;font-size:14px;color:var(--text3);text-align:right;padding-right:2px}
+.item-row{display:flex;gap:6px;margin-bottom:8px}
+.item-row:last-child{margin-bottom:0}
+.item-name-input{flex:2;min-width:0}
+.item-qty-input{flex:0 0 58px;text-align:center;padding:0 4px!important}
+.item-amt-input{flex:1.3;text-align:right}
+.item-total-box{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--rl);padding:12px 16px;font-size:17px;font-weight:600;color:var(--text2)}
+.item-total-box span:last-child{font-size:21px;color:var(--rose-dark)}
+
 /* inputs */
-.plist-input{width:100%;height:40px;font-size:14px;border:1px solid var(--border2);border-radius:var(--r);padding:0 12px;background:var(--surface);color:var(--text);outline:none;font-family:inherit;transition:border .15s}
+.plist-input{width:100%;height:40px;font-size:16px;border:1px solid var(--border2);border-radius:var(--r);padding:0 12px;background:var(--surface);color:var(--text);outline:none;font-family:inherit;transition:border .15s}
 .plist-input:focus{border-color:var(--pink-mid)}
 select.plist-input{cursor:pointer}
 textarea.plist-input{height:72px;padding:10px 12px;resize:none;line-height:1.5}
-.field-label{font-size:12px;color:var(--text2);margin-bottom:4px;font-weight:500}
+.field-label{font-size:14px;color:var(--text2);margin-bottom:4px;font-weight:500}
 .field{margin-bottom:12px}
 
 /* search */
 .search-wrap{position:relative;margin-bottom:12px}
 .search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none}
 .search-icon svg{width:15px;height:15px}
-.search-input{width:100%;height:38px;padding:0 34px;font-size:13px;border:1px solid var(--border2);border-radius:20px;background:var(--surface);color:var(--text);outline:none;font-family:inherit}
+.search-input{width:100%;height:38px;padding:0 34px;font-size:15px;border:1px solid var(--border2);border-radius:20px;background:var(--surface);color:var(--text);outline:none;font-family:inherit}
 .search-input::placeholder{color:var(--text3)}
 .search-input:focus{border-color:var(--pink-mid)}
-.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--pink-mid);border:none;color:#fff;width:17px;height:17px;border-radius:50%;font-size:10px;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0}
+.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--pink-mid);border:none;color:#fff;width:17px;height:17px;border-radius:50%;font-size:12px;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0}
 .search-clear.show{display:flex}
 .search-results{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
 .search-result-item{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
 .search-result-item:last-child{border-bottom:none}
 .search-result-item:hover{background:var(--surface2)}
 .search-result-info{flex:1;min-width:0}
-.search-result-name{font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-result-name{font-size:15px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .search-result-name em{color:var(--rose);font-style:normal;font-weight:600}
-.search-result-meta{font-size:11px;color:var(--text3);margin-top:2px}
-.search-empty{text-align:center;padding:28px 0;color:var(--text3);font-size:13px}
+.search-result-meta{font-size:13px;color:var(--text3);margin-top:2px}
+.search-empty{text-align:center;padding:28px 0;color:var(--text3);font-size:15px}
 
 /* store badge */
-.store-badge{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:500;white-space:nowrap;flex-shrink:0}
+.store-badge{font-size:12px;padding:3px 8px;border-radius:20px;font-weight:500;white-space:nowrap;flex-shrink:0}
 .sc-0{background:var(--mint);color:var(--mint-text)}
 .sc-1{background:var(--sky);color:var(--sky-text)}
 .sc-2{background:var(--gold);color:var(--gold-text)}
@@ -94,14 +107,14 @@ textarea.plist-input{height:72px;padding:10px 12px;resize:none;line-height:1.5}
 /* seg */
 .seg{display:flex;gap:0;background:var(--surface2);border-radius:var(--r);padding:3px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .seg::-webkit-scrollbar{display:none}
-.seg-btn{flex-shrink:0;height:28px;font-size:12px;padding:0 12px;border:none;background:transparent;cursor:pointer;border-radius:8px;color:var(--text2);white-space:nowrap;font-family:inherit;transition:all .15s}
+.seg-btn{flex-shrink:0;height:28px;font-size:14px;padding:0 12px;border:none;background:transparent;cursor:pointer;border-radius:8px;color:var(--text2);white-space:nowrap;font-family:inherit;transition:all .15s}
 .seg-btn.active{background:linear-gradient(145deg,#f8b4c8,#e87898);color:#fff;font-weight:500}
 
 /* buttons */
-.btn-primary{width:100%;height:44px;border:none;border-radius:var(--rxl);background:linear-gradient(135deg,#f5a0b5,#e05c7a);color:#fff;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(224,92,122,0.3);transition:opacity .15s}
+.btn-primary{width:100%;height:44px;border:none;border-radius:var(--rxl);background:linear-gradient(135deg,#f5a0b5,#e05c7a);color:#fff;font-size:17px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(224,92,122,0.3);transition:opacity .15s}
 .btn-primary:active{opacity:.8}
 .btn-primary.success{background:linear-gradient(135deg,#80d4b4,#2d9a6a)}
-.btn-sm{height:34px;padding:0 14px;border:none;border-radius:var(--rxl);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit}
+.btn-sm{height:34px;padding:0 14px;border:none;border-radius:var(--rxl);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit}
 .btn-sm-pink{background:linear-gradient(135deg,#f5a0b5,#e05c7a);color:#fff;box-shadow:0 2px 8px rgba(224,92,122,0.25)}
 .btn-sm-outline{background:transparent;border:1px solid var(--border2);color:var(--text2)}
 .btn-sm-green{background:var(--green);color:var(--green-text)}
@@ -111,10 +124,10 @@ textarea.plist-input{height:72px;padding:10px 12px;resize:none;line-height:1.5}
 .cal-nav button{background:none;border:none;cursor:pointer;color:var(--text2);width:32px;height:32px;border-radius:var(--r);display:flex;align-items:center;justify-content:center}
 .cal-nav button:hover{background:var(--surface2)}
 .cal-nav button svg{width:18px;height:18px}
-.cal-title{font-size:15px;font-weight:600;color:var(--text)}
+.cal-title{font-size:17px;font-weight:600;color:var(--text)}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.cal-dow{text-align:center;font-size:10px;color:var(--pink-mid);padding:4px 0;font-weight:600}
-.cal-day{aspect-ratio:1;border:none;background:transparent;border-radius:var(--r);cursor:pointer;font-size:12px;color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:background .1s;font-family:inherit}
+.cal-dow{text-align:center;font-size:12px;color:var(--pink-mid);padding:4px 0;font-weight:600}
+.cal-day{aspect-ratio:1;border:none;background:transparent;border-radius:var(--r);cursor:pointer;font-size:14px;color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:background .1s;font-family:inherit}
 .cal-day:hover:not(.empty){background:var(--surface2)}
 .cal-day.selected{background:linear-gradient(145deg,#f8b4c8,#e87898);color:#fff;font-weight:600}
 .cal-day.selected::after{background:#fff!important}
@@ -123,128 +136,128 @@ textarea.plist-input{height:72px;padding:10px 12px;resize:none;line-height:1.5}
 .cal-day.empty{pointer-events:none;opacity:0}
 .day-box{margin-top:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:12px}
 .day-box-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.day-date{font-size:13px;color:var(--text2)}
-.day-sum{font-size:15px;font-weight:600;color:var(--rose-dark)}
+.day-date{font-size:15px;color:var(--text2)}
+.day-sum{font-size:17px;font-weight:600;color:var(--rose-dark)}
 .rec-item{display:flex;align-items:center;gap:8px;padding:8px 4px;border-bottom:1px solid var(--border);cursor:pointer;border-radius:8px;margin:0 -4px;transition:background .1s}
 .rec-item:last-child{border-bottom:none}
 .rec-item:hover{background:var(--surface2)}
-.rec-name{flex:1;font-size:13px;color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rec-name{flex:1;font-size:15px;color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rec-right{text-align:right;flex-shrink:0}
-.rec-amt{font-size:13px;font-weight:600;color:var(--rose-dark)}
-.rec-sub{font-size:11px;color:var(--text3);margin-top:1px}
-.empty-tip{text-align:center;padding:24px 0;color:var(--text3);font-size:13px}
+.rec-amt{font-size:15px;font-weight:600;color:var(--rose-dark)}
+.rec-sub{font-size:13px;color:var(--text3);margin-top:1px}
+.empty-tip{text-align:center;padding:24px 0;color:var(--text3);font-size:15px}
 
 /* inventory */
 .inv-toolbar{display:flex;gap:8px;margin-bottom:12px;align-items:center}
 .inv-toolbar .search-wrap{flex:1;margin-bottom:0}
 .inv-list{display:flex;flex-direction:column;gap:8px}
 .inv-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:12px;display:flex;align-items:center;gap:10px}
-.inv-thumb{width:44px;height:44px;border-radius:10px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;cursor:pointer}
+.inv-thumb{width:44px;height:44px;border-radius:10px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;cursor:pointer}
 .inv-info{flex:1;min-width:0;cursor:pointer}
-.inv-name{font-size:14px;font-weight:500;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.inv-meta{font-size:12px;color:var(--text2);margin-top:2px}
+.inv-name{font-size:16px;font-weight:500;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.inv-meta{font-size:14px;color:var(--text2);margin-top:2px}
 .inv-right{text-align:right;flex-shrink:0}
 .qty-row{display:flex;align-items:center;gap:6px;justify-content:flex-end}
-.qty-num{font-size:18px;font-weight:600;color:var(--rose-dark);min-width:28px;text-align:center}
-.qty-btn{width:28px;height:28px;border:1px solid var(--border2);border-radius:50%;background:var(--surface);color:var(--text2);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:background .1s;flex-shrink:0}
+.qty-num{font-size:20px;font-weight:600;color:var(--rose-dark);min-width:28px;text-align:center}
+.qty-btn{width:28px;height:28px;border:1px solid var(--border2);border-radius:50%;background:var(--surface);color:var(--text2);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:background .1s;flex-shrink:0}
 .qty-btn:hover{background:var(--surface2)}
-.inv-ship-btn{margin-top:6px;font-size:11px;height:26px;padding:0 10px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;font-family:inherit;white-space:nowrap}
+.inv-ship-btn{margin-top:6px;font-size:13px;height:26px;padding:0 10px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;font-family:inherit;white-space:nowrap}
 .inv-ship-btn:hover{background:var(--green);color:var(--green-text);border-color:transparent}
-.inv-badge-low{font-size:10px;color:#c0415a;font-weight:500;margin-top:4px}
-.inv-empty{text-align:center;padding:40px 0;color:var(--text3);font-size:13px}
+.inv-badge-low{font-size:12px;color:#c0415a;font-weight:500;margin-top:4px}
+.inv-empty{text-align:center;padding:40px 0;color:var(--text3);font-size:15px}
 
 /* customers */
 .cust-list{display:flex;flex-direction:column;gap:8px}
 .cust-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:14px;cursor:pointer;transition:background .1s}
 .cust-card:hover{background:var(--surface2)}
 .cust-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.cust-name{font-size:15px;font-weight:600;color:var(--text)}
-.cust-status{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:500}
+.cust-name{font-size:17px;font-weight:600;color:var(--text)}
+.cust-status{font-size:13px;padding:3px 9px;border-radius:20px;font-weight:500}
 .status-paid{background:var(--green);color:var(--green-text)}
 .status-partial{background:var(--gold);color:var(--gold-text)}
 .status-unpaid{background:var(--peach);color:var(--peach-text)}
-.cust-items{font-size:12px;color:var(--text2);margin-bottom:6px;line-height:1.6}
+.cust-items{font-size:14px;color:var(--text2);margin-bottom:6px;line-height:1.6}
 .cust-money{display:flex;gap:12px}
-.cust-money-item{font-size:12px;color:var(--text2)}
-.cust-money-item strong{color:var(--text);font-size:13px}
-.cust-note{font-size:11px;color:var(--text3);margin-top:6px;line-height:1.5}
-.cust-empty{text-align:center;padding:40px 0;color:var(--text3);font-size:13px}
+.cust-money-item{font-size:14px;color:var(--text2)}
+.cust-money-item strong{color:var(--text);font-size:15px}
+.cust-note{font-size:13px;color:var(--text3);margin-top:6px;line-height:1.5}
+.cust-empty{text-align:center;padding:40px 0;color:var(--text3);font-size:15px}
 
 /* stats */
 .stat-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:14px}
-.stat-lbl{font-size:11px;color:var(--text2);margin-bottom:5px;font-weight:500}
-.stat-val{font-size:20px;font-weight:600;color:var(--rose-dark)}
-.stat-sub{font-size:11px;color:var(--text3);margin-top:3px}
+.stat-lbl{font-size:13px;color:var(--text2);margin-bottom:5px;font-weight:500}
+.stat-val{font-size:22px;font-weight:600;color:var(--rose-dark)}
+.stat-sub{font-size:13px;color:var(--text3);margin-top:3px}
 .bar-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:14px;margin-bottom:12px}
-.section-title{font-size:12px;color:var(--text2);margin-bottom:12px;font-weight:600;display:flex;align-items:center;justify-content:space-between}
+.section-title{font-size:14px;color:var(--text2);margin-bottom:12px;font-weight:600;display:flex;align-items:center;justify-content:space-between}
 .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:9px;cursor:pointer;border-radius:var(--r);padding:2px 4px;transition:background .1s}
 .bar-row:last-child{margin-bottom:0}
 .bar-row:hover{background:var(--surface2)}
-.bar-store{font-size:12px;color:var(--text2);min-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-store{font-size:14px;color:var(--text2);min-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bar-track{flex:1;height:8px;background:var(--surface2);border-radius:4px;overflow:hidden}
 .bar-fill{height:100%;border-radius:4px}
-.bar-amt{font-size:12px;color:var(--text);font-weight:500;min-width:52px;text-align:right}
+.bar-amt{font-size:14px;color:var(--text);font-weight:500;min-width:52px;text-align:right}
 .month-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;margin-bottom:12px}
-.month-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px;cursor:pointer;transition:background .1s}
+.month-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);font-size:15px;cursor:pointer;transition:background .1s}
 .month-row:last-child{border-bottom:none}
 .month-row:hover{background:var(--surface2)}
 .month-name{color:var(--text2)}
 .month-twd{font-weight:600;color:var(--rose-dark)}
-.month-cnt{font-size:11px;color:var(--text3)}
+.month-cnt{font-size:13px;color:var(--text3)}
 
 /* backup */
 .backup-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:16px;margin-bottom:12px}
-.backup-desc{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:14px}
+.backup-desc{font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:14px}
 .backup-btns{display:flex;flex-direction:column;gap:8px}
-.backup-btn{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--border2);border-radius:var(--r);background:var(--surface2);cursor:pointer;font-family:inherit;color:var(--text);transition:background .15s;font-size:13px}
+.backup-btn{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--border2);border-radius:var(--r);background:var(--surface2);cursor:pointer;font-family:inherit;color:var(--text);transition:background .15s;font-size:15px}
 .backup-btn:hover{background:var(--surface3)}
 .backup-btn svg{width:20px;height:20px;flex-shrink:0;color:var(--rose)}
 .backup-btn-info{text-align:left}
-.backup-btn-title{font-weight:500;font-size:13px}
-.backup-btn-sub{font-size:11px;color:var(--text2);margin-top:1px}
+.backup-btn-title{font-weight:500;font-size:15px}
+.backup-btn-sub{font-size:13px;color:var(--text2);margin-top:1px}
 .danger-zone{background:var(--surface);border:1px solid rgba(192,65,90,0.25);border-radius:var(--rl);padding:14px}
-.danger-title{font-size:12px;color:var(--rose-dark);margin-bottom:10px;font-weight:600}
-.danger-btn{width:100%;height:38px;border:1px solid rgba(192,65,90,0.35);border-radius:var(--r);background:transparent;color:var(--rose-dark);font-size:13px;cursor:pointer;font-family:inherit}
+.danger-title{font-size:14px;color:var(--rose-dark);margin-bottom:10px;font-weight:600}
+.danger-btn{width:100%;height:38px;border:1px solid rgba(192,65,90,0.35);border-radius:var(--r);background:transparent;color:var(--rose-dark);font-size:15px;cursor:pointer;font-family:inherit}
 
 /* modal */
 .modal-mask{position:fixed;inset:0;background:rgba(61,32,48,0.4);display:none;align-items:flex-end;justify-content:center;z-index:100}
 .modal-mask.open{display:flex}
 .modal-box{background:var(--surface);border-radius:24px 24px 0 0;padding:20px 20px 36px;width:100%;max-width:430px;max-height:88vh;overflow-y:auto}
 .modal-handle{width:36px;height:4px;background:var(--surface3);border-radius:2px;margin:0 auto 16px}
-.modal-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:16px}
+.modal-title{font-size:18px;font-weight:600;color:var(--text);margin-bottom:16px}
 .modal-btns{display:flex;gap:8px;margin-top:18px}
-.btn-cancel{flex:1;height:42px;border:1px solid var(--border2);border-radius:var(--rxl);background:transparent;color:var(--text2);font-size:14px;cursor:pointer;font-family:inherit}
-.btn-save{flex:1;height:42px;border:none;border-radius:var(--rxl);background:linear-gradient(135deg,#f5a0b5,#e05c7a);color:#fff;font-size:14px;cursor:pointer;font-weight:600;font-family:inherit;box-shadow:0 3px 10px rgba(224,92,122,0.28)}
-.btn-delete{height:42px;border:none;border-radius:var(--rxl);background:var(--peach);color:var(--peach-text);font-size:13px;cursor:pointer;padding:0 16px;font-family:inherit}
-.modal-summary{background:var(--surface2);border-radius:var(--r);padding:10px 12px;margin-bottom:12px;font-size:13px;color:var(--text2)}
+.btn-cancel{flex:1;height:42px;border:1px solid var(--border2);border-radius:var(--rxl);background:transparent;color:var(--text2);font-size:16px;cursor:pointer;font-family:inherit}
+.btn-save{flex:1;height:42px;border:none;border-radius:var(--rxl);background:linear-gradient(135deg,#f5a0b5,#e05c7a);color:#fff;font-size:16px;cursor:pointer;font-weight:600;font-family:inherit;box-shadow:0 3px 10px rgba(224,92,122,0.28)}
+.btn-delete{height:42px;border:none;border-radius:var(--rxl);background:var(--peach);color:var(--peach-text);font-size:15px;cursor:pointer;padding:0 16px;font-family:inherit}
+.modal-summary{background:var(--surface2);border-radius:var(--r);padding:10px 12px;margin-bottom:12px;font-size:15px;color:var(--text2)}
 .modal-summary strong{color:var(--rose-dark)}
 
 /* ship log */
 .ship-log{margin-top:10px}
-.ship-log-title{font-size:11px;color:var(--text3);margin-bottom:6px}
-.ship-log-item{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border)}
+.ship-log-title{font-size:13px;color:var(--text3);margin-bottom:6px}
+.ship-log-item{display:flex;justify-content:space-between;font-size:14px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border)}
 .ship-log-item:last-child{border-bottom:none}
 
 /* toast */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--rose-dark);color:#fff;padding:9px 20px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;transition:all .25s;white-space:nowrap;z-index:200}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--rose-dark);color:#fff;padding:9px 20px;border-radius:20px;font-size:15px;opacity:0;pointer-events:none;transition:all .25s;white-space:nowrap;z-index:200}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* cancelled banner in modal */
 .cancelled-banner{background:#fff0f0;border:1px solid rgba(192,65,90,0.3);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;display:none}
 .cancelled-banner.show{display:block}
-.cancelled-banner-title{font-size:13px;font-weight:600;color:var(--rose-dark);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.cancelled-banner-body{font-size:12px;color:var(--peach-text);line-height:1.6}
+.cancelled-banner-title{font-size:15px;font-weight:600;color:var(--rose-dark);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.cancelled-banner-body{font-size:14px;color:var(--peach-text);line-height:1.6}
 .refund-row{display:flex;align-items:center;gap:8px;margin-top:10px}
-.refund-label{font-size:12px;color:var(--rose-dark);white-space:nowrap;font-weight:500}
-.refund-input{flex:1;height:36px;font-size:13px;border:1px solid rgba(192,65,90,0.35);border-radius:var(--r);padding:0 10px;background:#fff8f8;color:var(--text);outline:none;font-family:inherit}
+.refund-label{font-size:14px;color:var(--rose-dark);white-space:nowrap;font-weight:500}
+.refund-input{flex:1;height:36px;font-size:15px;border:1px solid rgba(192,65,90,0.35);border-radius:var(--r);padding:0 10px;background:#fff8f8;color:var(--text);outline:none;font-family:inherit}
 .refund-input:focus{border-color:var(--rose-dark)}
 /* cancelled */
-.btn-cancel-order{width:100%;height:44px;border:1.5px dashed var(--border2);border-radius:var(--rxl);background:transparent;color:var(--text3);font-size:15px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .15s}
+.btn-cancel-order{width:100%;height:44px;border:1.5px dashed var(--border2);border-radius:var(--rxl);background:transparent;color:var(--text3);font-size:17px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .15s}
 .btn-cancel-order:hover{border-color:var(--rose);color:var(--rose);background:rgba(240,130,154,0.06)}
 .btn-cancel-order.cancelling{background:var(--peach);border-color:var(--peach-text);border-style:solid;color:var(--peach-text)}
 .rec-item.cancelled{opacity:0.5}
-.cancelled-tag{font-size:10px;padding:2px 7px;border-radius:20px;background:var(--peach);color:var(--peach-text);font-weight:500;flex-shrink:0}
+.cancelled-tag{font-size:12px;padding:2px 7px;border-radius:20px;background:var(--peach);color:var(--peach-text);font-weight:500;flex-shrink:0}
 .store-badge-cancelled{background:#fde8e8;color:#c0415a;border:1px solid rgba(192,65,90,0.25)}
 /* utils */
 .flex-between{display:flex;align-items:center;justify-content:space-between}
@@ -331,23 +344,37 @@ textarea.plist-input{height:72px;padding:10px 12px;resize:none;line-height:1.5}
       <div class="seg" id="store-seg"></div>
     </div>
     <div class="field">
-      <div class="field-label">品名</div>
-      <input class="plist-input" type="text" id="f-item" placeholder="例：LANEIGE 水凝霜">
+      <div class="field-label">帳號</div>
+      <select class="plist-input" id="f-account">
+        <option value="我的帳號">我的帳號</option>
+        <option value="媽媽的帳號">媽媽的帳號</option>
+      </select>
     </div>
     <div class="field">
-      <div class="field-label">金額</div>
-      <div style="display:flex;gap:6px">
-        <input class="plist-input" type="number" id="f-amount" placeholder="0" style="flex:1" inputmode="decimal">
-        <select class="plist-input" id="f-currency" style="width:96px">
-          <option value="krw">KRW ₩</option>
-          <option value="usd">USD $</option>
-          <option value="twd">TWD $</option>
-        </select>
+      <div class="field-label">商品項目（可填多筆，自動加總）</div>
+      <div class="item-rows-head">
+        <span class="irh-name">品名</span><span class="irh-qty">數量</span><span class="irh-amt">金額</span>
       </div>
+      <div id="item-rows"></div>
+    </div>
+    <div class="field">
+      <div class="field-label">幣別</div>
+      <select class="plist-input" id="f-currency" onchange="calcItemTotal()">
+        <option value="krw">KRW ₩</option>
+        <option value="usd">USD $</option>
+        <option value="twd">TWD $</option>
+      </select>
+    </div>
+    <div class="item-total-box">
+      <span>總金額</span><span id="item-total-display">0</span>
     </div>
     <div class="field">
       <div class="field-label">日期</div>
       <input class="plist-input" type="date" id="f-date">
+    </div>
+    <div class="field">
+      <div class="field-label">領貨時間（選填）</div>
+      <input class="plist-input" type="datetime-local" id="f-pickup">
     </div>
     <div class="field">
       <div class="field-label">關聯客人（選填）</div>
@@ -389,14 +416,30 @@ textarea.plist-input{height:72px;padding:10px 12px;resize:none;line-height:1.5}
 <!-- ── 統計 ── -->
 <div class="page" id="page-stats">
   <div style="padding-top:12px">
-    <div class="stat-cards" id="stat-cards"></div>
-    <div class="bar-section">
-      <div class="section-title">各店家紀錄數</div>
-      <div id="store-bars"></div>
+    <div class="field" style="margin-bottom:12px">
+      <div class="field-label">帳號篩選</div>
+      <select class="plist-input" id="stats-account-filter" onchange="onStatsAccountFilterChange()">
+        <option value="">全部帳號</option>
+        <option value="我的帳號">我的帳號</option>
+        <option value="媽媽的帳號">媽媽的帳號</option>
+      </select>
     </div>
-    <div class="month-section" id="month-section" style="display:none">
-      <div class="section-title" style="padding:12px 14px 0;margin-bottom:0">歷月紀錄 <span style="font-size:11px;color:var(--text3);font-weight:400">點擊查看明細</span></div>
-      <div id="month-rows"></div>
+    <div class="search-wrap">
+      <span class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      <input class="search-input" id="stats-search-input" type="text" placeholder="搜尋商品，比較各店紀錄..." oninput="onStatsSearch()" autocomplete="off">
+      <button class="search-clear" id="stats-search-clear" onclick="clearStatsSearch()">✕</button>
+    </div>
+    <div id="stats-search-results" style="display:none"></div>
+    <div id="stats-normal-content">
+      <div class="stat-cards" id="stat-cards"></div>
+      <div class="bar-section">
+        <div class="section-title">各店家紀錄數</div>
+        <div id="store-bars"></div>
+      </div>
+      <div class="month-section" id="month-section" style="display:none">
+        <div class="section-title" style="padding:12px 14px 0;margin-bottom:0">歷月紀錄 <span style="font-size:11px;color:var(--text3);font-weight:400">點擊查看明細</span></div>
+        <div id="month-rows"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -453,12 +496,30 @@ textarea.plist-input{height:72px;padding:10px 12px;resize:none;line-height:1.5}
     <div class="modal-title">✏️ 編輯紀錄</div>
     <div class="field"><div class="field-label">日期</div><input class="plist-input" type="date" id="e-date"></div>
     <div class="field"><div class="field-label">店家</div><select class="plist-input" id="e-store"></select></div>
-    <div class="field"><div class="field-label">品名</div><input class="plist-input" type="text" id="e-item"></div>
-    <div class="field"><div class="field-label">金額</div>
-      <div style="display:flex;gap:6px">
-        <input class="plist-input" type="number" id="e-amount" style="flex:1">
-        <select class="plist-input" id="e-currency" style="width:96px"><option value="krw">KRW ₩</option><option value="usd">USD $</option><option value="twd">TWD $</option></select>
+    <div class="field"><div class="field-label">帳號</div>
+      <select class="plist-input" id="e-account">
+        <option value="我的帳號">我的帳號</option>
+        <option value="媽媽的帳號">媽媽的帳號</option>
+      </select>
+    </div>
+    <div class="field"><div class="field-label">領貨時間（選填）</div><input class="plist-input" type="datetime-local" id="e-pickup"></div>
+    <div class="field">
+      <div class="field-label">商品項目（可填多筆，自動加總）</div>
+      <div class="item-rows-head">
+        <span class="irh-name">品名</span><span class="irh-qty">數量</span><span class="irh-amt">金額</span>
       </div>
+      <div id="e-item-rows"></div>
+    </div>
+    <div class="field">
+      <div class="field-label">幣別</div>
+      <select class="plist-input" id="e-currency" onchange="calcEditItemTotal()">
+        <option value="krw">KRW ₩</option>
+        <option value="usd">USD $</option>
+        <option value="twd">TWD $</option>
+      </select>
+    </div>
+    <div class="item-total-box">
+      <span>總金額</span><span id="e-item-total-display">0</span>
     </div>
     <div class="field"><div class="field-label">關聯客人</div><select class="plist-input" id="e-customer"></select></div>
     <div class="field" style="display:flex;align-items:center;justify-content:space-between">
@@ -574,6 +635,220 @@ const MONTHS_ZH      = ['一月','二月','三月','四月','五月','六月','�
 const EMOJIS         = ['🧴','💄','🧪','💊','🧼','🌸','✨','🎁','🛍','👜','🧦','🎀'];
 const KEYS = { stores:'df_stores', records:'df_records', rates:'df_rates', inv:'df_inventory', custs:'df_customers' };
 
+// ═══════════════ seed data (imported from user backup 免稅帳本備份_2026-07-06.json) ═══════════════
+const SEED_RECORDS = [
+  {
+    "id": "mr90opmdgc4c",
+    "date": "2026-05-26",
+    "store": "新世界免稅",
+    "item": "Travel gear 白色*11個 👸🏻",
+    "currency": "usd",
+    "origAmount": 282.35,
+    "customerId": null,
+    "cancelled": false,
+    "refundDate": null
+  },
+  {
+    "id": "mr90plpa9g3e",
+    "date": "2026-06-05",
+    "store": "新世界免稅",
+    "item": "Almost blue 耳機*26（銀聯",
+    "currency": "usd",
+    "origAmount": 274.51,
+    "customerId": null,
+    "cancelled": true,
+    "refundDate": "2026-07-06"
+  },
+  {
+    "id": "mr90qp5zmtzj",
+    "date": "2026-06-05",
+    "store": "新世界免稅",
+    "item": "Travel gear白色*2",
+    "currency": "usd",
+    "origAmount": 56.76,
+    "customerId": null,
+    "cancelled": true,
+    "refundDate": "2026-07-06"
+  },
+  {
+    "id": "mr90sj2e7bva",
+    "date": "2026-06-05",
+    "store": "新世界免稅",
+    "item": "Almost blue耳機*13 👸🏻",
+    "currency": "usd",
+    "origAmount": 142.2,
+    "customerId": null,
+    "cancelled": false,
+    "refundDate": null
+  },
+  {
+    "id": "mr90thp3n3v7",
+    "date": "2026-06-06",
+    "store": "新世界免稅",
+    "item": "Travel gear白色*2",
+    "currency": "usd",
+    "origAmount": 56.76,
+    "customerId": null,
+    "cancelled": true
+  },
+  {
+    "id": "mr90tnromnud",
+    "date": "2026-06-06",
+    "store": "新世界免稅",
+    "item": "Travel gear白色*2",
+    "currency": "usd",
+    "origAmount": 56.76,
+    "customerId": null,
+    "cancelled": true
+  },
+  {
+    "id": "mr90u8jnyb9i",
+    "date": "2026-06-22",
+    "store": "新世界免稅",
+    "item": "Travel gear 黑色*11👸🏻",
+    "currency": "usd",
+    "origAmount": 282.64,
+    "customerId": null,
+    "cancelled": false,
+    "refundDate": null
+  },
+  {
+    "id": "mr90v1ep3b5q",
+    "date": "2026-06-23",
+    "store": "新世界免稅",
+    "item": "Travel gear白色*6 黑色*5（👸🏻",
+    "currency": "usd",
+    "origAmount": 282.86,
+    "customerId": null,
+    "cancelled": false,
+    "refundDate": null
+  },
+  {
+    "id": "mr912wusoh0r",
+    "date": "2026-06-11",
+    "store": "新世界免稅",
+    "item": "Almost blue *14個",
+    "currency": "usd",
+    "origAmount": 116.48,
+    "customerId": null
+  },
+  {
+    "id": "mr9177ynjj17",
+    "date": "2026-06-22",
+    "store": "新世界免稅",
+    "item": "Oh scent 一批✨",
+    "currency": "usd",
+    "origAmount": 60.42,
+    "customerId": null,
+    "cancelled": false,
+    "refundDate": null
+  },
+  {
+    "id": "mr917tppuvqk",
+    "date": "2026-06-25",
+    "store": "新羅免稅",
+    "item": "Santa 陶罐*5✨",
+    "currency": "usd",
+    "origAmount": 123.67,
+    "customerId": null,
+    "cancelled": false,
+    "refundDate": null
+  },
+  {
+    "id": "mr918h79q067",
+    "date": "2026-06-25",
+    "store": "新羅免稅",
+    "item": "Santa 陶罐*5 👸🏻",
+    "currency": "usd",
+    "origAmount": 124.62,
+    "customerId": null
+  }
+];
+const SEED_INVENTORY = [
+  {
+    "id": "mr90opmeiwbn",
+    "name": "Travel gear 白色*11個",
+    "qty": 2,
+    "low": 1,
+    "note": "",
+    "emoji": "🧴",
+    "shipLog": []
+  },
+  {
+    "id": "mr90plpab2v3",
+    "name": "Almost blue 耳機*26（銀聯",
+    "qty": 0,
+    "low": 1,
+    "note": "",
+    "emoji": "🌸",
+    "shipLog": []
+  },
+  {
+    "id": "mr90sj2eowzk",
+    "name": "Almost blue耳機*13",
+    "qty": 2,
+    "low": 1,
+    "note": "",
+    "emoji": "🌸",
+    "shipLog": []
+  },
+  {
+    "id": "mr90u8jnm1qu",
+    "name": "Travel gear 黑色*11",
+    "qty": 2,
+    "low": 1,
+    "note": "",
+    "emoji": "🧴",
+    "shipLog": []
+  },
+  {
+    "id": "mr90v1ep7tde",
+    "name": "Travel gear白色*6 黑色*5",
+    "qty": 2,
+    "low": 1,
+    "note": "",
+    "emoji": "🧴",
+    "shipLog": []
+  },
+  {
+    "id": "mr912wusruqs",
+    "name": "Almost blue *14個",
+    "qty": 1,
+    "low": 1,
+    "note": "",
+    "emoji": "🌸",
+    "shipLog": []
+  },
+  {
+    "id": "mr9177yokbuc",
+    "name": "Oh scent 一批✨",
+    "qty": 1,
+    "low": 1,
+    "note": "",
+    "emoji": "🎁",
+    "shipLog": []
+  },
+  {
+    "id": "mr917tppzj6r",
+    "name": "Santa 陶罐*5",
+    "qty": 1,
+    "low": 1,
+    "note": "",
+    "emoji": "🎀",
+    "shipLog": []
+  },
+  {
+    "id": "mr918h79cjwb",
+    "name": "Santa 陶罐*5 👸🏻",
+    "qty": 1,
+    "low": 1,
+    "note": "",
+    "emoji": "🎀",
+    "shipLog": []
+  }
+];
+const SEED_RATES = {"krw": 44, "usd": 32};
+
 // ═══════════════ storage ═══════════════
 // Cloud sync via JSONbin.io — free, no login needed on any device
 const BIN_API  = 'https://api.jsonbin.io/v3/b';
@@ -671,9 +946,9 @@ function updateSyncUI(state) {
 }
 
 let stores    = safeGet('df_stores',    DEFAULT_STORES);
-let records   = safeGet('df_records',  []);
-let rates     = safeGet('df_rates',    {krw:44,usd:32});
-let inventory = safeGet('df_inventory',[]);
+let records   = safeGet('df_records',  SEED_RECORDS);
+let rates     = safeGet('df_rates',    SEED_RATES);
+let inventory = safeGet('df_inventory',SEED_INVENTORY);
 let customers = safeGet('df_customers',[]);
 
 // ═══════════════ utils ═══════════════
@@ -753,7 +1028,7 @@ function renderDayBox(){
     const cust=r.customerId?customers.find(c=>c.id===r.customerId):null;
     return `<div class="rec-item${r.cancelled?' cancelled':''}" onclick="openEdit('${r.id}')">
       <span class="store-badge ${r.cancelled?'store-badge-cancelled':storeColor(r.store)}">${esc(r.store)}</span>
-      <div style="flex:1;min-width:0"><div class="rec-name">${esc(r.item)}</div>${cust?`<div class="rec-sub">👤 ${esc(cust.name)}</div>`:''}</div>
+      <div style="flex:1;min-width:0"><div class="rec-name">${esc(r.item)}</div>${r.items&&r.items.length>1?`<div class="rec-sub">🧾 共 ${r.items.length} 項商品</div>`:''}${cust?`<div class="rec-sub">👤 ${esc(cust.name)}</div>`:''}</div>
       <div class="rec-right" style="text-align:right">
         ${r.cancelled
           ? `<span class="cancelled-tag">已取消</span>${r.refundDate?`<div class="rec-sub" style="color:var(--rose-dark);margin-top:3px">退刷 ${r.refundDate}</div>`:'<div class="rec-sub" style="color:var(--peach-text);margin-top:3px">待退刷</div>'}`
@@ -788,6 +1063,56 @@ function renderSearch(q){
   </div>`).join('');
 }
 
+// ═══════════════ stats: cross-store product search ═══════════════
+function onStatsSearch(){
+  const q=document.getElementById('stats-search-input').value.trim();
+  document.getElementById('stats-search-clear').classList.toggle('show',q.length>0);
+  document.getElementById('stats-search-results').style.display=q?'':'none';
+  document.getElementById('stats-normal-content').style.display=q?'none':'';
+  if(q) renderStatsSearch(q);
+}
+function clearStatsSearch(){
+  document.getElementById('stats-search-input').value='';
+  document.getElementById('stats-search-clear').classList.remove('show');
+  document.getElementById('stats-search-results').style.display='none';
+  document.getElementById('stats-normal-content').style.display='';
+}
+function closeStatsSearchAndEdit(id){ clearStatsSearch(); openEdit(id); }
+function renderStatsSearch(q){
+  const lower=q.toLowerCase();
+  // flatten each record's individual items so price comparison uses per-item price, not order total
+  const lines=[];
+  statsRecords().filter(r=>!r.cancelled).forEach(r=>{
+    const items=(r.items&&r.items.length)?r.items:[{name:r.item,qty:1,amt:r.origAmount||0}];
+    items.forEach(it=>{
+      if(it.name.toLowerCase().includes(lower)){
+        lines.push({recId:r.id,store:r.store,date:r.date,currency:r.currency||'twd',name:it.name,amt:it.amt||0,account:acctOf(r)});
+      }
+    });
+  });
+  const el=document.getElementById('stats-search-results');
+  if(!lines.length){ el.innerHTML=`<div class="search-empty">找不到「${esc(q)}」🌸</div>`; return; }
+
+  const byStore={};
+  lines.forEach(l=>{ (byStore[l.store]=byStore[l.store]||[]).push(l); });
+
+  const html=Object.entries(byStore).map(([store,recs])=>{
+    recs.sort((a,b)=>b.date.localeCompare(a.date));
+    const byCur={};
+    recs.forEach(l=>{ const c=l.currency; if(!byCur[c]) byCur[c]={sum:0,cnt:0}; byCur[c].sum+=l.amt; byCur[c].cnt++; });
+    const avgLine=Object.entries(byCur).map(([c,v])=>`平均 ${fmtAmt(v.sum/v.cnt,c)}`).join(' ・ ');
+    const rows=recs.map(l=>`<div class="rec-item" onclick="closeStatsSearchAndEdit('${l.recId}')">
+      <div class="rec-name">${hl(l.name,q)}</div>
+      <div class="rec-right"><div class="rec-amt">${fmtAmt(l.amt,l.currency)}</div><div class="rec-sub">${l.date} · 🔖${esc(l.account)}</div></div>
+    </div>`).join('');
+    return `<div class="bar-section" style="margin-bottom:10px">
+      <div class="section-title"><span class="store-badge ${storeColor(store)}">${esc(store)}</span><span style="font-size:12px;color:var(--text3);font-weight:400">${recs.length} 筆 ・ ${avgLine}</span></div>
+      ${rows}
+    </div>`;
+  }).join('');
+  el.innerHTML=`<div class="modal-summary" style="margin-bottom:12px">共找到 <strong>${lines.length}</strong> 筆，橫跨 <strong>${Object.keys(byStore).length}</strong> 間店</div>${html}`;
+}
+
 // ═══════════════ add record ═══════════════
 let selectedStore=stores[0];
 function buildStoreSeg(){
@@ -800,56 +1125,150 @@ function populateCustSelect(selId, currentId=''){
   const sel=document.getElementById(selId);
   sel.innerHTML='<option value="">— 不指定 —</option>'+customers.map(c=>`<option value="${c.id}"${c.id===currentId?' selected':''}>${esc(c.name)}</option>`).join('');
 }
+
+// ── multi-item rows ──
+const ITEM_ROW_COUNT = 5;
+function buildItemRows(){
+  const wrap=document.getElementById('item-rows');
+  let html='';
+  for(let i=0;i<ITEM_ROW_COUNT;i++){
+    html+=`<div class="item-row">
+      <input class="plist-input item-name-input" type="text" id="ir-name-${i}" placeholder="品名 ${i+1}">
+      <input class="plist-input item-qty-input" type="number" id="ir-qty-${i}" placeholder="1" min="1" value="1">
+      <input class="plist-input item-amt-input" type="number" id="ir-amt-${i}" placeholder="0" inputmode="decimal" oninput="calcItemTotal()">
+    </div>`;
+  }
+  wrap.innerHTML=html;
+  calcItemTotal();
+}
+function getItemRows(){
+  const rows=[];
+  for(let i=0;i<ITEM_ROW_COUNT;i++){
+    const name=document.getElementById(`ir-name-${i}`).value.trim();
+    if(!name) continue;
+    const qty=parseInt(document.getElementById(`ir-qty-${i}`).value)||1;
+    const amt=parseFloat(document.getElementById(`ir-amt-${i}`).value)||0;
+    rows.push({name,qty,amt});
+  }
+  return rows;
+}
+function calcItemTotal(){
+  const total=getItemRows().reduce((s,r)=>s+r.amt,0);
+  const cur=document.getElementById('f-currency').value;
+  document.getElementById('item-total-display').textContent=fmtAmt(total,cur);
+}
+function resetItemRows(){
+  for(let i=0;i<ITEM_ROW_COUNT;i++){
+    document.getElementById(`ir-name-${i}`).value='';
+    document.getElementById(`ir-qty-${i}`).value='1';
+    document.getElementById(`ir-amt-${i}`).value='';
+  }
+  calcItemTotal();
+}
+
 function addRecord(){
-  const item=document.getElementById('f-item').value.trim();
-  const amt=parseFloat(document.getElementById('f-amount').value);
+  const rows=getItemRows();
   const cur=document.getElementById('f-currency').value;
   const date=document.getElementById('f-date').value;
+  const pickupTime=document.getElementById('f-pickup').value||null;
+  const account=document.getElementById('f-account').value;
   const custId=document.getElementById('f-customer').value;
-  if(!item){showToast('請輸入品名');return;}
-  if(!amt||isNaN(amt)){showToast('請輸入金額');return;}
+  if(!rows.length){showToast('請至少輸入一筆品名');return;}
+  if(rows.some(r=>!r.amt)){showToast('請輸入每筆品項的金額');return;}
   if(!date){showToast('請選擇日期');return;}
 
-  const rec={id:uid(),date,store:selectedStore,item,currency:cur,origAmount:amt,customerId:custId||null};
-  records.push(rec); safeSet('df_records',records);
+  const total=rows.reduce((s,r)=>s+r.amt,0);
+  const itemName=rows.map(r=>r.name).join('、');
+  const rec={id:uid(),date,store:selectedStore,account,pickupTime,item:itemName,items:rows,currency:cur,origAmount:total,customerId:custId||null};
+  records.push(rec);
 
-  // auto-sync inventory
-  const itemLow=item.toLowerCase();
-  const existing=inventory.find(iv=>iv.name.toLowerCase()===itemLow);
-  if(existing){ existing.qty+=1; safeSet('df_inventory',inventory); showToast(`紀錄已新增，庫存「${existing.name}」+1 🌸`); }
-  else{ inventory.push({id:uid(),name:item,qty:1,low:1,note:'',emoji:autoEmoji(item),shipLog:[]}); safeSet('df_inventory',inventory); showToast(`紀錄已新增，已建立庫存「${item}」🌸`); }
+  // auto-sync inventory for every item in this order
+  rows.forEach(r=>{
+    const nameLow=r.name.toLowerCase();
+    const existing=inventory.find(iv=>iv.name.toLowerCase()===nameLow);
+    if(existing){ existing.qty+=r.qty; }
+    else{ inventory.push({id:uid(),name:r.name,qty:r.qty,low:1,note:'',emoji:autoEmoji(r.name),shipLog:[]}); }
+  });
+  safeSet('df_records',records); safeSet('df_inventory',inventory);
 
-  document.getElementById('f-item').value=''; document.getElementById('f-amount').value='';
+  showToast(`已新增 1 筆訂單（${rows.length} 項商品），合計 ${fmtAmt(total,cur)} 🌸`);
+
+  resetItemRows();
+  document.getElementById('f-pickup').value='';
   const btn=document.getElementById('add-btn'); btn.textContent='✓ 已新增！'; btn.classList.add('success');
   setTimeout(()=>{btn.textContent='✦ 新增紀錄';btn.classList.remove('success');},1600);
 }
 
 function addCancelledRecord(){
-  const item=document.getElementById('f-item').value.trim();
-  const amt=parseFloat(document.getElementById('f-amount').value);
+  const rows=getItemRows();
   const cur=document.getElementById('f-currency').value;
   const date=document.getElementById('f-date').value;
+  const pickupTime=document.getElementById('f-pickup').value||null;
+  const account=document.getElementById('f-account').value;
   const custId=document.getElementById('f-customer').value;
-  if(!item){showToast('請輸入品名');return;}
+  if(!rows.length){showToast('請至少輸入一筆品名');return;}
   if(!date){showToast('請選擇日期');return;}
-  const rec={id:uid(),date,store:selectedStore,item,currency:cur,origAmount:amt||0,customerId:custId||null,cancelled:true};
-  records.push(rec); safeSet('df_records',records);
-  document.getElementById('f-item').value=''; document.getElementById('f-amount').value='';
+
+  const total=rows.reduce((s,r)=>s+r.amt,0);
+  const itemName=rows.map(r=>r.name).join('、');
+  const rec={id:uid(),date,store:selectedStore,account,pickupTime,item:itemName,items:rows,currency:cur,origAmount:total,customerId:custId||null,cancelled:true};
+  records.push(rec);
+  safeSet('df_records',records);
+
+  resetItemRows();
+  document.getElementById('f-pickup').value='';
   const btn=document.getElementById('cancel-btn');
   btn.textContent='✕ 已記錄取消'; btn.classList.add('cancelling');
   setTimeout(()=>{btn.textContent='✕ 已取消';btn.classList.remove('cancelling');},1600);
-  showToast(`「${item}」已標記取消 ✕`);
+  showToast(`已將這筆訂單（${rows.length} 項商品）標記取消 ✕`);
 }
 
 // ═══════════════ edit record ═══════════════
 let editingId=null;
+const EDIT_ITEM_ROW_COUNT = 5;
+function buildEditItemRows(existingItems){
+  const wrap=document.getElementById('e-item-rows');
+  const rowCount=Math.max(EDIT_ITEM_ROW_COUNT, existingItems.length);
+  let html='';
+  for(let i=0;i<rowCount;i++){
+    const it=existingItems[i]||{name:'',qty:1,amt:''};
+    html+=`<div class="item-row">
+      <input class="plist-input item-name-input" type="text" id="e-ir-name-${i}" placeholder="品名 ${i+1}" value="${esc(it.name||'')}">
+      <input class="plist-input item-qty-input" type="number" id="e-ir-qty-${i}" placeholder="1" min="1" value="${it.qty||1}">
+      <input class="plist-input item-amt-input" type="number" id="e-ir-amt-${i}" placeholder="0" inputmode="decimal" value="${it.amt||''}" oninput="calcEditItemTotal()">
+    </div>`;
+  }
+  wrap.innerHTML=html;
+  wrap.dataset.rowCount=rowCount;
+  calcEditItemTotal();
+}
+function getEditItemRows(){
+  const rowCount=parseInt(document.getElementById('e-item-rows').dataset.rowCount)||EDIT_ITEM_ROW_COUNT;
+  const rows=[];
+  for(let i=0;i<rowCount;i++){
+    const nameEl=document.getElementById(`e-ir-name-${i}`); if(!nameEl) continue;
+    const name=nameEl.value.trim();
+    if(!name) continue;
+    const qty=parseInt(document.getElementById(`e-ir-qty-${i}`).value)||1;
+    const amt=parseFloat(document.getElementById(`e-ir-amt-${i}`).value)||0;
+    rows.push({name,qty,amt});
+  }
+  return rows;
+}
+function calcEditItemTotal(){
+  const total=getEditItemRows().reduce((s,r)=>s+r.amt,0);
+  const cur=document.getElementById('e-currency').value;
+  document.getElementById('e-item-total-display').textContent=fmtAmt(total,cur);
+}
 function openEdit(id){
   const r=records.find(x=>x.id===id); if(!r) return;
   editingId=id;
   document.getElementById('e-date').value=r.date;
-  document.getElementById('e-item').value=r.item;
-  document.getElementById('e-amount').value=r.origAmount||'';
+  document.getElementById('e-account').value=r.account||'我的帳號';
+  document.getElementById('e-pickup').value=r.pickupTime||'';
   document.getElementById('e-currency').value=r.currency||'twd';
+  const existingItems=(r.items&&r.items.length)?r.items:[{name:r.item,qty:1,amt:r.origAmount||0}];
+  buildEditItemRows(existingItems);
   document.getElementById('e-store').innerHTML=stores.map(s=>`<option${s===r.store?' selected':''}>${esc(s)}</option>`).join('');
   populateCustSelect('e-customer', r.customerId||'');
   document.getElementById('e-cancelled').checked=!!r.cancelled;
@@ -867,10 +1286,15 @@ function closeEdit(){ document.getElementById('edit-modal').classList.remove('op
 function saveEdit(){
   if(!editingId) return;
   const r=records.find(x=>x.id===editingId); if(!r) return;
+  const rows=getEditItemRows();
+  if(!rows.length){showToast('請至少輸入一筆品名');return;}
   r.date=document.getElementById('e-date').value;
+  r.account=document.getElementById('e-account').value;
+  r.pickupTime=document.getElementById('e-pickup').value||null;
   r.store=document.getElementById('e-store').value;
-  r.item=document.getElementById('e-item').value.trim();
-  r.origAmount=parseFloat(document.getElementById('e-amount').value)||0;
+  r.items=rows;
+  r.item=rows.map(x=>x.name).join('、');
+  r.origAmount=rows.reduce((s,x)=>s+x.amt,0);
   r.currency=document.getElementById('e-currency').value;
   r.customerId=document.getElementById('e-customer').value||null;
   r.cancelled=document.getElementById('e-cancelled').checked;
@@ -1065,9 +1489,19 @@ function deleteCust(){
 }
 
 // ═══════════════ stats ═══════════════
+let statsAccountFilter='';
+function onStatsAccountFilterChange(){
+  statsAccountFilter=document.getElementById('stats-account-filter').value;
+  renderStats();
+  const q=document.getElementById('stats-search-input').value.trim();
+  if(q) renderStatsSearch(q);
+}
+function acctOf(r){ return r.account||'我的帳號'; }
+function statsRecords(){ return statsAccountFilter ? records.filter(r=>acctOf(r)===statsAccountFilter) : records; }
 function renderStats(){
   const now=new Date(), mStr=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
-  const mRecs=records.filter(r=>r.date.startsWith(mStr)&&!r.cancelled);
+  const base=statsRecords();
+  const mRecs=base.filter(r=>r.date.startsWith(mStr)&&!r.cancelled);
   const tots={}; mRecs.forEach(r=>{const c=r.currency||'twd';tots[c]=(tots[c]||0)+(r.origAmount||0);});
   const totStr=Object.entries(tots).map(([c,a])=>fmtAmt(a,c)).join(' ＋ ')||'—';
   const unpaidCusts=customers.filter(c=>(c.due||0)>(c.paid||0));
@@ -1075,7 +1509,7 @@ function renderStats(){
     <div class="stat-card"><div class="stat-lbl">本月消費合計</div><div class="stat-val" style="font-size:15px">${totStr}</div><div class="stat-sub">${mRecs.length} 筆紀錄</div></div>
     <div class="stat-card"><div class="stat-lbl">待收款客人</div><div class="stat-val">${unpaidCusts.length}</div><div class="stat-sub">共 ${customers.length} 位客人</div></div>`;
   // store bars
-  const byStore={}; records.filter(r=>!r.cancelled).forEach(r=>{byStore[r.store]=(byStore[r.store]||0)+1;});
+  const byStore={}; base.filter(r=>!r.cancelled).forEach(r=>{byStore[r.store]=(byStore[r.store]||0)+1;});
   const sorted=Object.entries(byStore).sort((a,b)=>b[1]-a[1]);
   const max=sorted[0]?sorted[0][1]:1;
   document.getElementById('store-bars').innerHTML=sorted.map(([name,cnt])=>{
@@ -1087,7 +1521,7 @@ function renderStats(){
     </div>`;
   }).join('')||'<div class="empty-tip">尚無資料</div>';
   // monthly
-  const byMonth={}; records.filter(r=>!r.cancelled).forEach(r=>{const m=r.date.slice(0,7);if(!byMonth[m])byMonth[m]={cnt:0,sum:{}};byMonth[m].cnt++;const c=r.currency||'twd';byMonth[m].sum[c]=(byMonth[m].sum[c]||0)+(r.origAmount||0);});
+  const byMonth={}; base.filter(r=>!r.cancelled).forEach(r=>{const m=r.date.slice(0,7);if(!byMonth[m])byMonth[m]={cnt:0,sum:{}};byMonth[m].cnt++;const c=r.currency||'twd';byMonth[m].sum[c]=(byMonth[m].sum[c]||0)+(r.origAmount||0);});
   const months=Object.entries(byMonth).sort((a,b)=>b[0].localeCompare(a[0]));
   const ms=document.getElementById('month-section');
   if(months.length){
@@ -1100,8 +1534,10 @@ function renderStats(){
 }
 function openStatsDetail(type,key){
   let title='',recs=[];
-  if(type==='store'){title=`🏪 ${key}`;recs=records.filter(r=>r.store===key).sort((a,b)=>b.date.localeCompare(a.date));}
-  else{const[y,mo]=key.split('-');title=`📅 ${y} · ${MONTHS_ZH[parseInt(mo)-1]}`;recs=records.filter(r=>r.date.startsWith(key)).sort((a,b)=>b.date.localeCompare(a.date));}
+  const base=statsRecords();
+  if(type==='store'){title=`🏪 ${key}`;recs=base.filter(r=>r.store===key).sort((a,b)=>b.date.localeCompare(a.date));}
+  else{const[y,mo]=key.split('-');title=`📅 ${y} · ${MONTHS_ZH[parseInt(mo)-1]}`;recs=base.filter(r=>r.date.startsWith(key)).sort((a,b)=>b.date.localeCompare(a.date));}
+  if(statsAccountFilter) title+=` ・ ${esc(statsAccountFilter)}`;
   document.getElementById('stats-modal-title').textContent=title;
   const tots={}; recs.forEach(r=>{const c=r.currency||'twd';tots[c]=(tots[c]||0)+(r.origAmount||0);});
   const totLine=Object.entries(tots).map(([c,a])=>fmtAmt(a,c)).join(' ＋ ')||'—';
@@ -1114,7 +1550,8 @@ function openStatsDetail(type,key){
           ?'<div style="font-size:10px;color:var(--rose-dark);margin-top:2px">退刷 '+r.refundDate+'</div>'
           :'<div style="font-size:10px;color:var(--peach-text);margin-top:2px">待退刷</div>')
       : '<div class="rec-amt">'+fmtAmt(r.origAmount,r.currency||'twd')+'</div>';
-    const metaHtml=r.date+(cust?' · 👤'+esc(cust.name):'');
+    const acctTag=' · 🔖'+esc(acctOf(r));
+    const metaHtml=r.date+(cust?' · 👤'+esc(cust.name):'')+acctTag;
     return '<div class="rec-item" onclick="closeStatsModal();openEdit(\''
       +r.id+'\')"><span class="store-badge '+badgeClass+'">'+esc(r.store)+'</span>'
       +'<div style="flex:1;min-width:0"><div class="rec-name">'+esc(r.item)
@@ -1125,6 +1562,7 @@ function openStatsDetail(type,key){
   document.getElementById('stats-modal').classList.add('open');
 }
 function closeStatsModal(){ document.getElementById('stats-modal').classList.remove('open'); }
+
 
 // ═══════════════ backup ═══════════════
 function copyBinId(){
@@ -1198,7 +1636,13 @@ function exportCSV(){
 function clearAll(){
   if(!confirm('確定清除所有資料？此動作無法復原！')) return;
   if(!confirm('再次確認：所有帳本、客人、庫存資料都會被刪除。')) return;
-  ['df_records','df_inventory','df_customers','df_rates','df_stores','df_bin_id'].forEach(k=>localStorage.removeItem(k));
+  // write explicit empty state (not removeItem) so it won't fall back to the embedded seed data on reload
+  localStorage.setItem('df_records','[]');
+  localStorage.setItem('df_inventory','[]');
+  localStorage.setItem('df_customers','[]');
+  localStorage.removeItem('df_rates');
+  localStorage.removeItem('df_stores');
+  localStorage.removeItem('df_bin_id');
   location.reload();
 }
 
@@ -1217,6 +1661,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   document.getElementById('rate-usd').value=rates.usd;
   document.getElementById('rate-label').textContent='₩'+rates.krw+' · $'+rates.usd;
   buildStoreSeg();
+  buildItemRows();
   populateCustSelect('f-customer');
   renderCal();
 });
