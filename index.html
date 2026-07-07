@@ -304,6 +304,10 @@ textarea.plist-input{height:72px;padding:10px 12px;resize:none;line-height:1.5}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
     <span class="nav-label">庫存</span>
   </button>
+  <button class="nav-btn" id="nb-list" onclick="switchPage('list',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+    <span class="nav-label">清單</span>
+  </button>
   <button class="nav-btn" id="nb-stats" onclick="switchPage('stats',this)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
     <span class="nav-label">統計</span>
@@ -441,6 +445,29 @@ textarea.plist-input{height:72px;padding:10px 12px;resize:none;line-height:1.5}
         <div id="month-rows"></div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ── 店家清單 ── -->
+<div class="page" id="page-list">
+  <div style="padding-top:12px">
+    <div class="field">
+      <div class="field-label">免稅店</div>
+      <select class="plist-input" id="list-store-filter" onchange="renderList()">
+        <option value="">全部店家</option>
+      </select>
+    </div>
+    <div class="field">
+      <div class="field-label">排序方式</div>
+      <select class="plist-input" id="list-sort" onchange="renderList()">
+        <option value="date-desc">日期（新 → 舊）</option>
+        <option value="date-asc">日期（舊 → 新）</option>
+        <option value="amt-desc">金額（高 → 低）</option>
+        <option value="amt-asc">金額（低 → 高）</option>
+      </select>
+    </div>
+    <div class="modal-summary" id="list-summary" style="margin-bottom:10px"></div>
+    <div id="list-rows"></div>
   </div>
 </div>
 
@@ -977,13 +1004,14 @@ async function fetchLiveRates(){
 
 // ═══════════════ page switch ═══════════════
 function switchPage(name,btn){
-  ['cal','add','cust','inv','stats','backup'].forEach(n=>{
+  ['cal','add','cust','inv','stats','list','backup'].forEach(n=>{
     document.getElementById('page-'+n)?.classList.toggle('active',n===name);
     document.getElementById('nb-'+n)?.classList.toggle('active',n===name);
   });
   if(name==='stats')  renderStats();
   if(name==='inv')    renderInv();
   if(name==='cust')   renderCusts();
+  if(name==='list'){ buildListStoreFilter(); renderList(); }
   if(name==='backup'){
     const id=localStorage.getItem('df_bin_id')||'';
     const box=document.getElementById('bin-id-box');
@@ -1498,6 +1526,44 @@ function onStatsAccountFilterChange(){
 }
 function acctOf(r){ return r.account||'我的帳號'; }
 function statsRecords(){ return statsAccountFilter ? records.filter(r=>acctOf(r)===statsAccountFilter) : records; }
+// ═══════════════ store list page ═══════════════
+function buildListStoreFilter(){
+  const sel=document.getElementById('list-store-filter');
+  const cur=sel.value;
+  sel.innerHTML='<option value="">全部店家</option>'+stores.map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join('');
+  if(stores.includes(cur)) sel.value=cur;
+}
+function renderList(){
+  const storeF=document.getElementById('list-store-filter').value;
+  const sortMode=document.getElementById('list-sort').value;
+  let recs=records.slice();
+  if(storeF) recs=recs.filter(r=>r.store===storeF);
+  recs.sort((a,b)=>{
+    if(sortMode==='date-desc') return b.date.localeCompare(a.date)||(b.origAmount||0)-(a.origAmount||0);
+    if(sortMode==='date-asc')  return a.date.localeCompare(b.date)||(a.origAmount||0)-(b.origAmount||0);
+    if(sortMode==='amt-desc')  return (b.origAmount||0)-(a.origAmount||0);
+    if(sortMode==='amt-asc')   return (a.origAmount||0)-(b.origAmount||0);
+    return 0;
+  });
+  const tots={}; recs.filter(r=>!r.cancelled).forEach(r=>{const c=r.currency||'twd';tots[c]=(tots[c]||0)+(r.origAmount||0);});
+  const totLine=Object.entries(tots).map(([c,a])=>fmtAmt(a,c)).join(' ＋ ')||'—';
+  document.getElementById('list-summary').innerHTML=`共 <strong>${recs.length}</strong> 筆 ・ 合計 <strong>${totLine}</strong>`;
+  document.getElementById('list-rows').innerHTML=recs.map(r=>{
+    const cust=r.customerId?customers.find(c=>c.id===r.customerId):null;
+    const badgeClass=r.cancelled?'store-badge-cancelled':storeColor(r.store);
+    const amtHtml=r.cancelled
+      ? '<span class="cancelled-tag">已取消</span>'
+      : `<div class="rec-amt">${fmtAmt(r.origAmount,r.currency||'twd')}</div>`;
+    const itemsTag=(r.items&&r.items.length>1)?`<div class="rec-sub">🧾 共 ${r.items.length} 項商品</div>`:'';
+    const metaHtml=`${r.date}${cust?' · 👤'+esc(cust.name):''} · 🔖${esc(acctOf(r))}`;
+    return `<div class="rec-item" onclick="openEdit('${r.id}')">
+      <span class="store-badge ${badgeClass}">${esc(r.store)}</span>
+      <div style="flex:1;min-width:0"><div class="rec-name">${esc(r.item)}</div>${itemsTag}<div class="rec-sub">${metaHtml}</div></div>
+      <div class="rec-right" style="text-align:right">${amtHtml}</div>
+    </div>`;
+  }).join('')||'<div class="empty-tip">尚無紀錄</div>';
+}
+
 function renderStats(){
   const now=new Date(), mStr=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
   const base=statsRecords();
@@ -1579,7 +1645,7 @@ async function importBinId(){
   const ok = await cloudLoad();
   if(ok){
     renderCal(); populateCustSelect('f-customer');
-    buildStoreSeg(); renderStats();
+    buildStoreSeg(); buildListStoreFilter(); renderStats();
     document.getElementById('rate-krw').value=rates.krw;
     document.getElementById('rate-usd').value=rates.usd;
     document.getElementById('rate-label').textContent='₩'+rates.krw+' · $'+rates.usd;
@@ -1661,6 +1727,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   document.getElementById('rate-usd').value=rates.usd;
   document.getElementById('rate-label').textContent='₩'+rates.krw+' · $'+rates.usd;
   buildStoreSeg();
+  buildListStoreFilter();
   buildItemRows();
   populateCustSelect('f-customer');
   renderCal();
